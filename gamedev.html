@@ -1,0 +1,483 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Jaylen Williams Portfolio</title>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap');
+        
+        body {
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', system-ui, sans-serif;
+            margin: 0;
+            background: linear-gradient(to bottom, #000000, #121212);
+            color: white;
+            line-height: 1.6;
+            padding-top: 75px;
+        }
+
+        /* Target only paragraphs and general text */
+        p, li, span, a, div {
+            font-size: 20px;
+        }
+
+        header {
+            background: linear-gradient(to right, #0b1d51, #1e3a8a);
+            padding: 1em 2em;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            width: 100%;
+            transition: top 0.4s ease;
+            z-index: 1000;
+            box-sizing: border-box;
+        }
+
+        .site-name {
+            font-weight: 700;
+            font-size: 1.5em;
+            color: white;
+            text-decoration: none;
+            display: inline-block;
+            cursor: pointer;
+            text-align: left;
+            transition: opacity 0.2s ease-in-out, transform 0.2s ease-in-out;
+            transform-origin: left center;
+        }
+
+        .site-name:hover {
+            opacity: 0.85;
+            transform: scale(1.05);
+        }
+
+        .site-name .main-name {
+            display: block;
+            font-size: 1.5rem;
+            font-weight: 700;
+            line-height: 1.2;
+        }
+
+        .site-name .subtitle {
+            display: block;
+            font-size: 0.9rem;
+            font-weight: 400;
+            opacity: 0.85;
+            margin-top: 2px;
+        }
+
+        nav {
+            margin-right: 20px;
+        }
+
+        nav a {
+            color: white;
+            margin: 0 15px;
+            text-decoration: none;
+            font-weight: bold;
+            font-size: 1.3em;
+            padding: 5px 10px;
+            border-radius: 4px;
+            transition: background-color 0.3s ease;
+            cursor: pointer;
+        }
+
+        nav a:hover {
+            background-color: rgba(255, 255, 255, 0.1);
+        }
+
+        h1 {
+            font-size: 2.5em;
+            font-weight: 700;
+            margin-bottom: 1em;
+            margin-top: 0.2em;
+            letter-spacing: -0.02em;
+        }
+
+        h2 {
+            font-size: 2em;
+            font-weight: 600;
+            margin-top: 0.5em;
+            margin-bottom: 0.5em;
+            letter-spacing: -0.01em;
+        }
+
+        .container {
+            padding: 1.5em 2em 4em;
+            min-height: calc(100vh - 200px);
+        }
+
+        .about-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            grid-template-rows: auto auto;
+            gap: 2em;
+            margin-top: 1em;
+        }
+
+        .about-section {
+            background-color: rgba(255, 255, 255, 0.03);
+            padding: 1.5em;
+            border-radius: 10px;
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            border-left: 4px solid rgba(30, 58, 138, 0.6);
+        }
+
+        .about-section:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 8px 25px rgba(0, 0, 0, 0.2);
+            border-left-color: rgba(30, 58, 138, 1);
+        }
+
+        .about-section.full-width {
+            grid-column: 1 / -1;
+        }
+
+        .project {
+            margin-bottom: 3em;
+            background-color: rgba(255, 255, 255, 0.02);
+            padding: 1.5em;
+            border-radius: 10px;
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+
+        .project:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+        }
+
+        .project img {
+            width: 100%;
+            max-width: 400px;
+            display: block;
+            margin: 1em auto;
+            border-radius: 8px;
+            transition: transform 0.3s ease, filter 0.3s ease;
+        }
+
+        .project img:hover {
+            transform: scale(1.05);
+            filter: brightness(1.2);
+        }
+
+        .project-description {
+            background-color: rgba(255, 255, 255, 0.05);
+            padding: 15px;
+            border-radius: 5px;
+            margin: 15px 0;
+            font-size: 0.95em;
+            line-height: 1.6;
+        }
+
+        .project a {
+            display: inline-block;
+            background: linear-gradient(to right, #0b1d51, #1e3a8a);
+            color: white;
+            padding: 10px 20px;
+            text-decoration: none;
+            border-radius: 5px;
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            margin-top: 10px;
+        }
+
+        .project a:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(30, 58, 138, 0.4);
+        }
+
+        footer {
+            background: linear-gradient(to right, #0b1d51, #1e3a8a);
+            padding: 1em;
+            text-align: center;
+            position: fixed;
+            bottom: -100px;
+            left: 0;
+            right: 0;
+            width: 100%;
+            transition: bottom 0.4s ease;
+            box-sizing: border-box;
+        }
+
+        footer a {
+            margin: 0 10px;
+            display: inline-block;
+        }
+
+        footer img {
+            width: 30px;
+            height: 30px;
+            vertical-align: middle;
+            transition: transform 0.3s ease, filter 0.3s ease;
+        }
+
+        footer img:hover {
+            transform: scale(1.2);
+            filter: brightness(1.2);
+        }
+
+        section {
+            display: none;
+            animation: fadeIn 0.5s ease-in-out;
+        }
+
+        section.active {
+            display: block;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; }
+            to { opacity: 1; }
+        }
+
+        .resume-link {
+            display: inline-block;
+            background: linear-gradient(to right, #0b1d51, #1e3a8a);
+            color: white;
+            padding: 15px 30px;
+            text-decoration: none;
+            border-radius: 8px;
+            margin: 20px 0;
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            font-size: 1.1em;
+            font-weight: bold;
+        }
+
+        .resume-link:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 8px 25px rgba(30, 58, 138, 0.4);
+        }
+
+        .resume-section {
+            background-color: rgba(255, 255, 255, 0.05);
+            padding: 20px;
+            border-radius: 10px;
+            margin: 20px 0;
+        }
+
+        /* Responsive Design */
+        @media (max-width: 768px) {
+            header {
+                flex-direction: column;
+                padding: 1em;
+                left: 0;
+                right: 0;
+                width: 100%;
+            }
+
+            nav {
+                margin: 10px 0 0 0;
+            }
+
+            nav a {
+                margin: 0 10px;
+                font-size: 1.1em;
+            }
+
+            body {
+                padding-top: 110px;
+            }
+
+            .about-grid {
+                grid-template-columns: 1fr;
+                gap: 1.5em;
+            }
+
+            .container {
+                padding: 1.5em 1em 4em;
+            }
+
+            h1 {
+                font-size: 2em;
+            }
+
+            h2 {
+                font-size: 1.6em;
+            }
+
+            p, li, span, a, div {
+                font-size: 18px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <a href="#home" class="site-name" onclick="showPage('home'); window.scrollTo({top:0, behavior:'smooth'}); return false;">
+            <span class="main-name">Jaylen Williams</span>
+            <span class="subtitle">Aspiring Game Designer</span>
+        </a>
+        <nav>
+            <a onclick="showPage('home')">Home</a>
+            <a onclick="showPage('projects')">Projects</a>
+            <a onclick="showPage('resume')">Resume</a>
+        </nav>
+    </header>
+
+    <div class="container">
+        <section id="home" class="active">
+            <h1>About Me</h1>
+            <h2>Hello!</h2>
+            
+            <div class="about-grid">
+                <div class="about-section">
+                    <p>I'm Jaylen Williams!</p>
+                    <p>
+                        Games have been a part of my life since I was a child, and I have always dreamed of creating my own games. The first game I ever played was Super Mario 64 DS, and it sparked my love for gaming. I remember spending hours exploring the Mushroom Kingdom, jumping, and stomping goombas. I loved the sense of adventure and discovery that the game offered. I was fascinated by how the game was made and how it created such an immersive experience. 
+                    </p>
+                    <p>As I grew up, I started to explore more games and genres. I played everything from platformers to RPGs, and I was always amazed by the creativity and innovation in game design. I remember playing games like Red Dead Redemption and The Legend of Zelda: Breath of the Wild, which had rich worlds and incredibly fun gameplay. I was particularly drawn to the storytelling and world-building aspects of these games. These games influenced my passion for game design and development, and I knew I wanted to create my own games one day.</p>
+                </div>
+                
+                <div class="about-section">
+                    <p>
+                        I began my development journey in 2019 watching tutorials and building small demos with Unity. I would use basic blocks to play around and prototype. My first actual experience with projects was in my Intro to Interactive Media class where I had to build a few projects using Scratch. I currently have experience in Unity and C#, and I recently started exploring Unreal Engine 5. I'm also an officer in the UMD Game Developers Club, where I collaborate with other students to share knowledge. I am always looking to learn new things and improve my skills in game development.
+                    </p>
+                    <p>I am currently pursuing my Bachelor of Science in Information Science with a minor in Technology Innovation Leadership from the University of Maryland, College Park. This has given me a solid foundation in technology and problem-solving. I also gained an analytical mindset through my coursework, which I apply to my game development projects. </p>
+                <p>I have a strong interest in game design, level design, combat design, and world building. I am always looking for new challenges and opportunities to grow as a game developer. I am currently working on more projects that showcase my skills and creativity in game design and development.</p>
+                </div>
+                <div class="about-section full-width">
+                    <p>
+                        In my free time, I enjoy playing games, reading and watching videos about game design, and exploring new technologies. 
+                    </p>
+                    <p>My Favorite Games:
+                    <ul> 
+                        <li>The Legend of Zelda: Breath of the Wild</li>
+                        <li>Red Dead Redemption 2</li>
+                        <li>Cyberpunk 2077</li>
+                        <li>Grand Theft Auto V</li>
+                        <li>Super Mario Odyssey</li>
+                        <li>Katana Zero</li>
+                        <li>I Am Your Beast</li>
+                    </ul> 
+                    </p>
+                    </p>
+                    <p>Feel free to explore my projects and resume to see what I've been working on!</p>
+                </div>
+            </div>
+            
+            <h3>Thank you for visiting my portfolio!</h3>
+        </section>
+
+        <section id="projects">
+            <h1>Projects</h1>
+            
+            <div class="project">
+                <h2>The Final Handgun</h2>
+                <img src="https://img.itch.zone/aW1nLzIwOTkwOTA1LnBuZw==/347x500/qd%2BjHp.png" alt="The Final Handgun">
+                <div class="project-description">
+                    This is "The Final Handgun", this game was made for the UMD Spring 2025 Game Jam. The theme of the jam was "gambling". So I decided to make another handgun sequel, this time in a casino setting. With this game I built on the concepts I learned from my previous game jams, and I wanted to create a more polished experience. 
+            I added proper
+            enemy models and animations. I added better collision detection and improved the shooting mechanics. I also added
+             better
+            effects for damage taken by enemies. I worked solo again and this time was my first time using Unity 6.
+            This time I had 48 hours to create another first person shooter and I had a great time making it. This is the final because
+            I want to move on to other projects and genres, and continue to challenge myself.
+
+                </div>
+                <a href="https://b1tc3o.itch.io/the-final-handgun" target="_blank">View Game</a>
+            </div>
+
+            <div class="project">
+                <h2>The Flooding Handgun</h2>
+                <img src="https://img.itch.zone/aW1nLzE4NDY2NDg2LmpwZw==/347x500/CD2QyH.jpg" alt="The Flooding Handgun">
+                <div class="project-description">
+                    This is "The Flooding Handgun", this game was made for the UMD Fall 2024 Game Jam, my second game jam experience. The theme was "Flooding". After the success of my first game jam, and the reaction to "The Floating Handgun", I decided to make a sequel. This time I stepped up and went in a different direction for the genre. Pulling from one of my favorite genres, I decided to make a first person shooter. The game was in a flooded environment, and you play as a hand holding a handgun, trying to survive against hordes of enemies. I even added a mini boss. I worked solo again and created this game in 24 hours also, and I am very proud of the result. I had a lot of fun making it and enjoyed the challenge of creating a FPS in such a short time frame.
+                </div>
+                <a href="https://b1tc3o.itch.io/the-flooding-handgun" target="_blank">View Game</a>
+            </div>
+
+            <div class="project">
+                <h2>The Floating Handgun</h2>
+                <img src="https://img.itch.zone/aW1nLzE1NzY5ODQ5LnBuZw==/347x500/7XdSBA.png" alt="The Floating Handgun">
+                <div class="project-description">
+                    This is "The Floating Handgun", this game was made for the UMD Spring 2024 Game Jam, my first game jam experience. The themes were "Medieval Fantasy" and "Modern Weapons". I decided to make a game where you are in a medieval setting, but you are a severed hand holding a modern handgun. The goal is to defeat the enemies and gain points. It's an arcade style top down shooter. I worked solo and created this game in 24 hours, and I am proud of the result. I had a lot of fun making it and I learned a lot about game development in the process.
+                </div>
+                <a href="https://b1tc3o.itch.io/the-floating-handgun" target="_blank">View Game</a>
+            </div>
+        </section>
+
+        <section id="resume">
+            <h1>Resume</h1>
+            <a href="c:\Users\jayle\Downloads\JaylenWRESUME.pdf" download class="resume-link">Download Resume</a>
+            
+            <div class="resume-section">
+                <h2>Key Information</h2>
+                <p><strong>Education: University of Maryland, College Park</strong></p>
+                <p>Bachelor of Science in Information Science, Minor in Technology Innovation Leadership. <br> 
+                Coursework focused on data analysis, systems thinking, and user-centered design. 
+                <br>Member of the Game Developers Club, XR Club, and Code: Black.<br>
+                Expected Graduation: June 2026</p>
+                <p><strong>Relevant Experiences: Junior Design Specialist & Trainee</strong></p>
+                <p>Refined design and prototyping skills by leading a cross-functional team to create a community-centered proposal.<br> 
+                Honed collaboration and problem-solving abilities by analyzing complex challenges and brainstorming creative solutions. 
+                <br> My leadership and teamwork were recognized with multiple awards. <br> </p>
+                <p><strong>Skills: Game Design & Development</strong></p>
+                <p>Expertise in game design and prototyping using Unity. <br>
+                Proficient in visual scripting, level design, and game balancing. Experienced in programming with C# and Python.<br></p>
+            </div>
+        </section>
+    </div>
+
+    <footer>
+        <a href="https://b1tc3o.itch.io/" target="_blank">
+            <img src="https://static.itch.io/images/itchio-textless-white.svg" alt="Itch.io">
+        </a>
+        <a href="https://www.linkedin.com/in/jaylenwilliams1/" target="_blank">
+            <img src="c:\Users\jayle\Downloads\in-logo\in-logo\InBug-White.png" alt="LinkedIn">
+        </a>
+    </footer>
+
+    <script>
+        function showPage(pageId) {
+            // Hide all sections
+            document.querySelectorAll('section').forEach(section => {
+                section.classList.remove('active');
+            });
+            
+            // Show the selected section
+            const targetSection = document.getElementById(pageId);
+            if (targetSection) {
+                targetSection.classList.add('active');
+            }
+            
+            // Scroll to top smoothly
+            window.scrollTo({top: 0, behavior: 'smooth'});
+        }
+
+        // Header and footer scroll behavior
+        let lastScrollTop = 0;
+        let scrollTimeout;
+        const header = document.querySelector('header');
+        const footer = document.querySelector('footer');
+
+        window.addEventListener('scroll', () => {
+            const st = window.pageYOffset || document.documentElement.scrollTop;
+            
+            // Hide/show header on scroll
+            if (st > lastScrollTop && st > 100) {
+                header.style.top = '-200px';
+            } else {
+                header.style.top = '0';
+            }
+            
+            lastScrollTop = st <= 0 ? 0 : st;
+            
+            // Hide footer immediately when scrolling
+            footer.style.bottom = '-100px';
+            
+            // Show footer after scrolling stops
+            clearTimeout(scrollTimeout);
+            scrollTimeout = setTimeout(() => {
+                footer.style.bottom = '0';
+            }, 200);
+        });
+
+        // Initialize page
+        document.addEventListener('DOMContentLoaded', () => {
+            showPage('home');
+        });
+    </script>
+</body>
+</html>
