@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Jaylen Williams Portfolio</title>
+    <title>Jaylen Williams</title>
     <style>
         @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap');
         
@@ -16,7 +16,6 @@
             padding-top: 75px;
         }
 
-        /* Target only paragraphs and general text */
         p, li, span, a, div {
             font-size: 20px;
         }
@@ -105,11 +104,191 @@
             letter-spacing: -0.01em;
         }
 
+        h3 {
+            font-size: 1.5em;
+            font-weight: 600;
+            margin-top: 1em;
+            margin-bottom: 0.5em;
+        }
+
         .container {
             padding: 1.5em 2em 4em;
             min-height: calc(100vh - 200px);
         }
 
+        /* Featured Project Section */
+        .featured-project {
+            background: linear-gradient(135deg, rgba(11, 29, 81, 0.3), rgba(30, 58, 138, 0.3));
+            border: 2px solid rgba(30, 58, 138, 0.5);
+            border-radius: 12px;
+            padding: 2em;
+            margin-bottom: 3em;
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+
+        .featured-project:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 15px 40px rgba(30, 58, 138, 0.4);
+        }
+
+        .featured-badge {
+            display: inline-block;
+            background: linear-gradient(to right, #1e3a8a, #3b82f6);
+            padding: 8px 16px;
+            border-radius: 20px;
+            font-size: 0.9em;
+            font-weight: 600;
+            margin-bottom: 1em;
+        }
+
+        /* Slideshow styles */
+        .slideshow-container {
+            position: relative;
+        }
+
+        .slide {
+            display: none;
+            animation: fadeIn 0.5s ease-in-out;
+        }
+
+        .slide.active-slide {
+            display: block;
+        }
+
+        .slideshow-nav {
+            position: absolute;
+            top: 50%;
+            transform: translateY(-50%);
+            background: rgba(30, 58, 138, 0.7);
+            color: white;
+            border: none;
+            font-size: 2em;
+            padding: 15px 20px;
+            cursor: pointer;
+            border-radius: 5px;
+            transition: background 0.3s ease, transform 0.3s ease;
+            z-index: 10;
+        }
+
+        .slideshow-nav:hover {
+            background: rgba(30, 58, 138, 1);
+            transform: translateY(-50%) scale(1.1);
+        }
+
+        .slideshow-nav.prev {
+            left: -60px;
+        }
+
+        .slideshow-nav.next {
+            right: -60px;
+        }
+
+        .slideshow-indicators {
+            text-align: center;
+            margin-top: 20px;
+        }
+
+        .indicator-dot {
+            display: inline-block;
+            width: 12px;
+            height: 12px;
+            border-radius: 50%;
+            background: rgba(255, 255, 255, 0.3);
+            margin: 0 5px;
+            cursor: pointer;
+            transition: background 0.3s ease, transform 0.3s ease;
+        }
+
+        .indicator-dot.active {
+            background: #3b82f6;
+            transform: scale(1.3);
+        }
+
+        .indicator-dot:hover {
+            background: rgba(255, 255, 255, 0.6);
+        }
+
+        .project-buttons {
+            margin-top: 15px;
+        }
+
+        .project-buttons a {
+            display: inline-block;
+            background: linear-gradient(to right, #0b1d51, #1e3a8a);
+            color: white;
+            padding: 10px 20px;
+            text-decoration: none;
+            border-radius: 5px;
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            margin-right: 10px;
+            margin-bottom: 10px;
+        }
+
+        .project-buttons a:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(30, 58, 138, 0.4);
+        }
+
+        .project-buttons a.secondary {
+            background: linear-gradient(to right, #1e3a8a, #3b82f6);
+        }
+
+        .placeholder-image {
+            width: 100%;
+            max-width: 500px;
+            height: 300px;
+            display: block;
+            margin: 1.5em auto;
+            border-radius: 8px;
+            background: linear-gradient(135deg, rgba(30, 58, 138, 0.3), rgba(59, 130, 246, 0.3));
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 2em;
+            color: rgba(255, 255, 255, 0.5);
+            border: 2px dashed rgba(255, 255, 255, 0.3);
+        }
+
+        .featured-project img {
+            width: 100%;
+            max-width: 500px;
+            display: block;
+            margin: 1.5em auto;
+            border-radius: 8px;
+            box-shadow: 0 8px 20px rgba(0, 0, 0, 0.3);
+            transition: transform 0.3s ease, filter 0.3s ease;
+            cursor: pointer;
+        }
+
+        .featured-project img:hover {
+            transform: scale(1.05);
+            filter: brightness(1.2);
+        }
+
+        /* About Me Summary */
+        .about-summary {
+            background-color: rgba(255, 255, 255, 0.03);
+            padding: 1.5em;
+            border-radius: 10px;
+            margin-bottom: 2em;
+            border-left: 4px solid rgba(30, 58, 138, 0.6);
+        }
+
+        .read-more-link {
+            display: inline-block;
+            color: #60a5fa;
+            text-decoration: none;
+            font-weight: 600;
+            margin-top: 1em;
+            transition: color 0.3s ease;
+        }
+
+        .read-more-link:hover {
+            color: #93c5fd;
+            text-decoration: underline;
+        }
+
+        /* About Me Full Page */
         .about-grid {
             display: grid;
             grid-template-columns: 1fr 1fr;
@@ -136,17 +315,20 @@
             grid-column: 1 / -1;
         }
 
+        /* Project Cards */
         .project {
             margin-bottom: 3em;
             background-color: rgba(255, 255, 255, 0.02);
             padding: 1.5em;
             border-radius: 10px;
             transition: transform 0.3s ease, box-shadow 0.3s ease;
+            border: 1px solid rgba(255, 255, 255, 0.05);
         }
 
         .project:hover {
             transform: translateY(-5px);
             box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+            border-color: rgba(30, 58, 138, 0.3);
         }
 
         .project img {
@@ -168,8 +350,43 @@
             padding: 15px;
             border-radius: 5px;
             margin: 15px 0;
-            font-size: 0.95em;
             line-height: 1.6;
+        }
+
+        .project-meta {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 10px;
+            margin: 15px 0;
+        }
+
+        .meta-tag {
+            background-color: rgba(30, 58, 138, 0.3);
+            padding: 6px 12px;
+            border-radius: 4px;
+            font-size: 0.9em;
+            font-weight: 500;
+        }
+
+        .project-highlights {
+            background-color: rgba(255, 255, 255, 0.03);
+            padding: 15px;
+            border-radius: 5px;
+            margin: 15px 0;
+        }
+
+        .project-highlights h3 {
+            margin-top: 0;
+            font-size: 1.2em;
+        }
+
+        .project-highlights ul {
+            margin: 10px 0;
+            padding-left: 20px;
+        }
+
+        .project-highlights li {
+            margin-bottom: 8px;
         }
 
         .project a {
@@ -181,6 +398,7 @@
             border-radius: 5px;
             transition: transform 0.3s ease, box-shadow 0.3s ease;
             margin-top: 10px;
+            margin-right: 10px;
         }
 
         .project a:hover {
@@ -300,6 +518,19 @@
             p, li, span, a, div {
                 font-size: 18px;
             }
+
+            .slideshow-nav.prev {
+                left: 5px;
+            }
+
+            .slideshow-nav.next {
+                right: 5px;
+            }
+
+            .slideshow-nav {
+                font-size: 1.5em;
+                padding: 10px 15px;
+            }
         }
     </style>
 </head>
@@ -307,42 +538,231 @@
     <header>
         <a href="#home" class="site-name" onclick="showPage('home'); window.scrollTo({top:0, behavior:'smooth'}); return false;">
             <span class="main-name">Jaylen Williams</span>
-            <span class="subtitle">Aspiring Game Designer</span>
+            <span class="subtitle">Game Designer</span>
         </a>
         <nav>
             <a onclick="showPage('home')">Home</a>
             <a onclick="showPage('projects')">Projects</a>
+            <a onclick="showPage('about')">About Me</a>
             <a onclick="showPage('resume')">Resume</a>
         </nav>
     </header>
 
     <div class="container">
         <section id="home" class="active">
+            <h1>Featured Projects</h1>
+            
+            <div class="featured-project">
+                <div class="slideshow-container">
+                    <button class="slideshow-nav prev" onclick="changeSlide(-1)">‹</button>
+                    <button class="slideshow-nav next" onclick="changeSlide(1)">›</button>
+
+                    <!-- Slide 1: Featured Game -->
+                    <div class="slide active-slide">
+                        <span class="featured-badge">Latest Release</span>
+                        <h2>The Final Handgun</h2>
+                        <img src="https://img.itch.zone/aW1nLzIwOTkwOTA1LnBuZw==/347x500/qd%2BjHp.png" alt="The Final Handgun">
+                        
+                        <div class="project-meta">
+                            <span class="meta-tag">Unity 6</span>
+                            <span class="meta-tag">C#</span>
+                            <span class="meta-tag">48-Hour Development</span>
+                            <span class="meta-tag">First Person Shooter</span>
+                        </div>
+                        
+                        <div class="project-description">
+                            A casino-themed first person shooter created for the UMD Spring 2025 Game Jam with the theme "gambling". Building on my previous game jam experiences, I focused on creating a more polished and refined gameplay experience with improved mechanics and visual effects.
+                        </div>
+                        
+                        <div class="project-highlights">
+                            <h3>Key Features & Accomplishments</h3>
+                            <ul>
+                                <li><strong>Advanced Animation System:</strong> Implemented proper enemy models with animations for movement and attacks</li>
+                                <li><strong>Enhanced Combat Mechanics:</strong> Developed improved shooting mechanics with better collision detection and responsive hit feedback</li>
+                                <li><strong>Visual Effects:</strong> Created damage indicators and visual feedback systems for player and enemy interactions</li>
+                                <li><strong>First Unity 6 Project:</strong> Successfully migrated workflow to Unity 6, learning new features and optimizations</li>
+                            </ul>
+                        </div>
+                        
+                        <div class="project-highlights">
+                            <h3>What I Learned</h3>
+                            <p>This project taught me the importance of iteration and polish. By refining mechanics from my previous games, I learned how small improvements in collision detection and visual feedback can enhance player experience. Working solo under a 48-hour deadline also strengthened my time management and prioritization skills.</p>
+                        </div>
+                        
+                        <div class="project-buttons">
+                            <a href="https://b1tc3o.itch.io/the-final-handgun" target="_blank">Play Game on Itch.io</a>
+                            <a href="#projects" onclick="showPage('projects')" class="secondary">View All Projects →</a>
+                        </div>
+                    </div>
+
+                    <!-- Slide 2: In Development -->
+                    <div class="slide">
+                        <span class="featured-badge">In Development</span>
+                        <h2>Upcoming Project</h2>
+                        <div class="placeholder-image">Coming Soon</div>
+                        
+                        <div class="project-description">
+                            I'm currently working on a new game project that aims to push my skills further in game design and development. This new project will be my first experience with Unreal Engine 5, allowing me to explore more advanced gameplay systems. Please stay tuned for updates!
+                        </div>
+                        
+                        <div class="project-highlights">
+                            <h3>What to Expect</h3>
+                            <p>This upcoming project represents a new direction in my game development journey. I'm focusing on creating a more interesting experience that will allow me to explore deeper gameplay systems,and more complex mechanics. I look forward to sharing more details as development progresses.</p>
+                        
+                        <div class="project-buttons">
+                            <a href="#projects" onclick="showPage('projects')" class="secondary">View All Projects →</a>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="slideshow-indicators">
+                    <span class="indicator-dot active" onclick="goToSlide(0)"></span>
+                    <span class="indicator-dot" onclick="goToSlide(1)"></span>
+                </div>
+            </div>
+
             <h1>About Me</h1>
-            <h2>Hello!</h2>
+            <div class="about-summary">
+                <p>I'm Jaylen Williams, a passionate game developer with a love for creating immersive experiences. Games have shaped my life since childhood, starting with Super Mario 64 DS, and now I'm pursuing my dream of creating my own games.</p>
+                
+                <p>I'm currently pursuing my Bachelor of Science in Information Science with a minor in Technology Innovation Leadership at the University of Maryland, College Park. I specialize in Unity and C# development, I will eventually gain experience in Unreal Engine 5. As an officer in the UMD Game Developers Club, I collaborate with other students to share knowledge and learn from one another.</p>
+                
+                <p>My areas of focus include game design, level design, combat design, and world building. I'm always seeking new challenges to grow as a developer and create memorable gaming experiences.</p>
+                
+                <a href="#about" onclick="showPage('about')" class="read-more-link">Read Full Story →</a>
+            </div>
+        </section>
+
+        <section id="projects">
+            <h1>All Projects</h1>
+            
+            <div class="project">
+                <h2>The Final Handgun</h2>
+                <img src="https://img.itch.zone/aW1nLzIwOTkwOTA1LnBuZw==/347x500/qd%2BjHp.png" alt="The Final Handgun">
+                
+                <div class="project-meta">
+                    <span class="meta-tag">Unity 6</span>
+                    <span class="meta-tag">C#</span>
+                    <span class="meta-tag">48-Hour Game Jam</span>
+                    <span class="meta-tag">Solo Developer</span>
+                </div>
+                
+                <div class="project-description">
+                    Created for the UMD Spring 2025 Game Jam with the theme "gambling". A casino-themed first person shooter that builds on concepts from previous game jams with a focus on polish and improved mechanics. This represents the finale of my game jam series as I transition to exploring new genres and projects.
+                </div>
+                
+                <div class="project-highlights">
+                    <h3>Technical Features</h3>
+                    <ul>
+                        <li>Proper enemy models with full animation systems</li>
+                        <li>Improved collision detection and hit registration</li>
+                        <li>Enhanced shooting mechanics with responsive feedback</li>
+                        <li>Visual damage indicators for player and enemies</li>
+                        <li>First project developed in Unity 6</li>
+                    </ul>
+                    
+                    <h3>What I Learned</h3>
+                    <p>I finally understood the importance of iteration and polish in game development. Learned how refinement of core mechanics—particularly collision systems and visual feedback can enhance player satisfaction. Developed stronger time management skills working within strict 48-hour constraints.</p>
+                </div>
+                
+                <a href="https://b1tc3o.itch.io/the-final-handgun" target="_blank">Play on Itch.io</a>
+            </div>
+            <div class="project">
+                <h2>The Flooding Handgun</h2>
+                <img src="https://img.itch.zone/aW1nLzE4NDY2NDg2LmpwZw==/347x500/CD2QyH.jpg" alt="The Flooding Handgun">
+                
+                <div class="project-meta">
+                    <span class="meta-tag">Unity</span>
+                    <span class="meta-tag">C#</span>
+                    <span class="meta-tag">24-Hour Game Jam</span>
+                    <span class="meta-tag">First Person Shooter</span>
+                    <span class="meta-tag">Solo Developer</span>
+                </div>
+                
+                <div class="project-description">
+                    My second game jam entry for UMD Fall 2024 with the theme "Flooding". A sequel that pivots to the FPS genre, featuring a flooded environment where you play as a hand holding a handgun, surviving against enemy hordes. Includes a mini boss encounter and more complex enemy AI.
+                </div>
+                
+                <div class="project-highlights">
+                    <h3>Technical Features</h3>
+                    <ul>
+                        <li>First person shooter mechanics built from scratch</li>
+                        <li>Enemy AI with behavior patterns and wave spawning system</li>
+                        <li>Addition of Mini boss</li>
+                        <li>Environmental design for flooded setting</li>
+                        <li>Player movement and camera controls optimized for FPS gameplay</li>
+                    </ul>
+                    
+                    <h3>What I Learned</h3>
+                    <p>Gained valuable experience transitioning between game genres. Learned to implement FPS mechanics including camera control, shooting systems, and enemy AI under extreme time pressure. This project proved I could successfully execute ideas outside my comfort zone.</p>
+                </div>
+                
+                <a href="https://b1tc3o.itch.io/the-flooding-handgun" target="_blank">Play on Itch.io</a>
+            </div>
+
+            <div class="project">
+                <h2>The Floating Handgun</h2>
+                <img src="https://img.itch.zone/aW1nLzE1NzY5ODQ5LnBuZw==/347x500/7XdSBA.png" alt="The Floating Handgun">
+                
+                <div class="project-meta">
+                    <span class="meta-tag">Unity</span>
+                    <span class="meta-tag">C#</span>
+                    <span class="meta-tag">24-Hour Game Jam</span>
+                    <span class="meta-tag">Top-Down Shooter</span>
+                    <span class="meta-tag">Solo Developer</span>
+                </div>
+                
+                <div class="project-description">
+                    My first game jam experience for UMD Spring 2024 with themes "Medieval Fantasy" and "Modern Weapons". An arcade-style top-down shooter where you play as a severed hand wielding a modern handgun in a medieval setting. Gameplay focused on defeating enemies and scoring points.
+                </div>
+                
+                <div class="project-highlights">
+                    <h3>Technical Features</h3>
+                    <ul>
+                        <li>Top-down shooter mechanics</li>
+                        <li>Point-based scoring system</li>
+                        <li>Enemy spawning and basic AI behavior</li>
+                        <li>Player health and damage systems</li>
+                        <li>Medieval-themed environment with modern weapon contrast</li>
+                    </ul>
+                    
+                    <h3>What I Learned</h3>
+                    <p>My introduction to rapid game development and working under pressure. Learned essential game jam skills: scope management, prioritizing core gameplay, and delivering a complete experience in 24 hours. This project gave me confidence to tackle more game jam projects in the future.</p>
+                </div>
+                
+                <a href="https://b1tc3o.itch.io/the-floating-handgun" target="_blank">Play on Itch.io</a>
+            </div>
+        </section>
+
+        <section id="about">
+            <h1>About Me</h1>
+            <h2>My Journey into Game Development</h2>
             
             <div class="about-grid">
                 <div class="about-section">
-                    <p>I'm Jaylen Williams!</p>
+                    <h3>The Beginning</h3>
                     <p>
-                        Games have been a part of my life since I was a child, and I have always dreamed of creating my own games. The first game I ever played was Super Mario 64 DS, and it sparked my love for gaming. I remember spending hours exploring the Mushroom Kingdom, jumping, and stomping goombas. I loved the sense of adventure and discovery that the game offered. I was fascinated by how the game was made and how it created such an immersive experience. 
+                        Games have been a part of my life since I was a child, and I have always dreamed of creating my own games. The first game I ever played was Super Mario 64 DS, and it sparked my love for gaming. I remember spending hours exploring the Mushroom Kingdom, jumping, and stomping goombas. I loved the sense of adventure and discovery that the game offered. I was fascinated by how the game was made and how it created such an immersive experience.
                     </p>
-                    <p>As I grew up, I started to explore more games and genres. I played everything from platformers to RPGs, and I was always amazed by the creativity and innovation in game design. I remember playing games like Red Dead Redemption and The Legend of Zelda: Breath of the Wild, which had rich worlds and incredibly fun gameplay. I was particularly drawn to the storytelling and world-building aspects of these games. These games influenced my passion for game design and development, and I knew I wanted to create my own games one day.</p>
+                    <p>As I grew up, I started to explore more games and genres. I played everything from platformers to RPGs, and I was always amazed by the creativity and innovation in game design. I remember playing games like Red Dead Redemption and The Legend of Zelda: Breath of the Wild, which had rich worlds and incredibly fun gameplay. I was particularly drawn to the storytelling and world-building aspects of these games. These games influenced my passion for game design and development.</p>
                 </div>
                 
                 <div class="about-section">
+                    <h3>My Development Journey</h3>
                     <p>
-                        I began my development journey in 2019 watching tutorials and building small demos with Unity. I would use basic blocks to play around and prototype. My first actual experience with projects was in my Intro to Interactive Media class where I had to build a few projects using Scratch. I currently have experience in Unity and C#, and I recently started exploring Unreal Engine 5. I'm also an officer in the UMD Game Developers Club, where I collaborate with other students to share knowledge. I am always looking to learn new things and improve my skills in game development.
+                        I began my development journey in 2019 watching tutorials and building small demos with Unity. I would use basic cubes to play around and prototype. My first actual experience with projects was in my Intro to Interactive Media class where I had to build a few projects using Scratch. I currently have experience in Unity and C#, and I will begin exploring Unreal Engine 5. I'm also an officer in the UMD Game Developers Club, where I collaborate with other students and continue to grow. I am always looking to learn new things and improve my skills in game development.
                     </p>
-                    <p>I am currently pursuing my Bachelor of Science in Information Science with a minor in Technology Innovation Leadership from the University of Maryland, College Park. This has given me a solid foundation in technology and problem-solving. I also gained an analytical mindset through my coursework, which I apply to my game development projects. </p>
-                <p>I have a strong interest in game design, level design, combat design, and world building. I am always looking for new challenges and opportunities to grow as a game developer. I am currently working on more projects that showcase my skills and creativity in game design and development.</p>
+                    <p>I am currently pursuing my Bachelor of Science in Information Science with a minor in Technology Innovation Leadership from the University of Maryland, College Park. This has given me a solid foundation in technology and problem-solving. I also gained an analytical mindset through my coursework, which I apply to my game development projects.</p>
+                    <p>I have a strong interest in game design, level design, combat design, and world building. I am always looking for new challenges and opportunities to grow as a game developer. I am currently working on more projects that showcase my skills and creativity in game design and development.</p>
                 </div>
+                
                 <div class="about-section full-width">
+                    <h3>Beyond Development</h3>
                     <p>
-                        In my free time, I enjoy playing games, reading and watching videos about game design, and exploring new technologies. 
+                        In my free time, I enjoy playing games, reading and watching videos about game design, and exploring new technologies.
                     </p>
-                    <p>My Favorite Games:
-                    <ul> 
+                    <p><strong>My Favorite Games:</strong></p>
+                    <ul>
                         <li>The Legend of Zelda: Breath of the Wild</li>
                         <li>Red Dead Redemption 2</li>
                         <li>Cyberpunk 2077</li>
@@ -350,9 +770,7 @@
                         <li>Super Mario Odyssey</li>
                         <li>Katana Zero</li>
                         <li>I Am Your Beast</li>
-                    </ul> 
-                    </p>
-                    </p>
+                    </ul>
                     <p>Feel free to explore my projects and resume to see what I've been working on!</p>
                 </div>
             </div>
@@ -360,62 +778,34 @@
             <h3>Thank you for visiting my portfolio!</h3>
         </section>
 
-        <section id="projects">
-            <h1>Projects</h1>
-            
-            <div class="project">
-                <h2>The Final Handgun</h2>
-                <img src="https://img.itch.zone/aW1nLzIwOTkwOTA1LnBuZw==/347x500/qd%2BjHp.png" alt="The Final Handgun">
-                <div class="project-description">
-                    This is "The Final Handgun", this game was made for the UMD Spring 2025 Game Jam. The theme of the jam was "gambling". So I decided to make another handgun sequel, this time in a casino setting. With this game I built on the concepts I learned from my previous game jams, and I wanted to create a more polished experience. 
-            I added proper
-            enemy models and animations. I added better collision detection and improved the shooting mechanics. I also added
-             better
-            effects for damage taken by enemies. I worked solo again and this time was my first time using Unity 6.
-            This time I had 48 hours to create another first person shooter and I had a great time making it. This is the final because
-            I want to move on to other projects and genres, and continue to challenge myself.
-
-                </div>
-                <a href="https://b1tc3o.itch.io/the-final-handgun" target="_blank">View Game</a>
-            </div>
-
-            <div class="project">
-                <h2>The Flooding Handgun</h2>
-                <img src="https://img.itch.zone/aW1nLzE4NDY2NDg2LmpwZw==/347x500/CD2QyH.jpg" alt="The Flooding Handgun">
-                <div class="project-description">
-                    This is "The Flooding Handgun", this game was made for the UMD Fall 2024 Game Jam, my second game jam experience. The theme was "Flooding". After the success of my first game jam, and the reaction to "The Floating Handgun", I decided to make a sequel. This time I stepped up and went in a different direction for the genre. Pulling from one of my favorite genres, I decided to make a first person shooter. The game was in a flooded environment, and you play as a hand holding a handgun, trying to survive against hordes of enemies. I even added a mini boss. I worked solo again and created this game in 24 hours also, and I am very proud of the result. I had a lot of fun making it and enjoyed the challenge of creating a FPS in such a short time frame.
-                </div>
-                <a href="https://b1tc3o.itch.io/the-flooding-handgun" target="_blank">View Game</a>
-            </div>
-
-            <div class="project">
-                <h2>The Floating Handgun</h2>
-                <img src="https://img.itch.zone/aW1nLzE1NzY5ODQ5LnBuZw==/347x500/7XdSBA.png" alt="The Floating Handgun">
-                <div class="project-description">
-                    This is "The Floating Handgun", this game was made for the UMD Spring 2024 Game Jam, my first game jam experience. The themes were "Medieval Fantasy" and "Modern Weapons". I decided to make a game where you are in a medieval setting, but you are a severed hand holding a modern handgun. The goal is to defeat the enemies and gain points. It's an arcade style top down shooter. I worked solo and created this game in 24 hours, and I am proud of the result. I had a lot of fun making it and I learned a lot about game development in the process.
-                </div>
-                <a href="https://b1tc3o.itch.io/the-floating-handgun" target="_blank">View Game</a>
-            </div>
-        </section>
-
         <section id="resume">
             <h1>Resume</h1>
-            <a href="JaylenWRESUME.pdf" download class="resume-link">Download Resume</a>
+            <a href="JaylenWRESUME.pdf" download class="resume-link">Download Resume (PDF)</a>
             
             <div class="resume-section">
-                <h2>Key Information</h2>
-                <p><strong>Education: University of Maryland, College Park</strong></p>
-                <p>Bachelor of Science in Information Science, Minor in Technology Innovation Leadership. <br> 
-                Coursework focused on data analysis, systems thinking, and user-centered design. 
-                <br>Member of the Game Developers Club, XR Club, and Code: Black.<br>
+                <h2>Education</h2>
+                <p><strong>University of Maryland, College Park</strong></p>
+                <p>Bachelor of Science in Information Science<br>
+                Minor in Technology Innovation Leadership<br>
                 Expected Graduation: June 2026</p>
-                <p><strong>Relevant Experiences: Junior Design Specialist & Trainee</strong></p>
-                <p>Refined design and prototyping skills by leading a cross-functional team to create a community-centered proposal.<br> 
-                Honed collaboration and problem-solving abilities by analyzing complex challenges and brainstorming creative solutions. 
-                <br> My leadership and teamwork were recognized with multiple awards. <br> </p>
-                <p><strong>Skills: Game Design & Development</strong></p>
-                <p>Expertise in game design and prototyping using Unity. <br>
-                Proficient in visual scripting, level design, and game balancing. Experienced in programming with C# and Python.<br></p>
+                <p>Coursework focused on data analysis, systems thinking, and user-centered design.<br>
+                Member of the Game Developers Club and XR Club.</p>
+            </div>
+
+            <div class="resume-section">
+                <h2>Work Experience</h2>
+                <p><strong>Junior Design Specialist & Trainee</strong></p>
+                <p>As a Junior Design Specialist, I led a cross-functional team to create a community-centered design proposal<br>
+                • Refined design and prototyping skills through hands-on project work<br>
+                • Analyzed complex challenges and brainstormed creative solutions<br>
+                • Recognized with multiple awards for leadership and teamwork</p>
+            </div>
+
+            <div class="resume-section">
+                <h2>Skills</h2>
+                <p><strong>Game Development:</strong> Unity, C#, Python<br>
+                <strong>Design:</strong> Game Design, Level Design, Combat Design, Visual Scripting<br>
+                <strong>Other:</strong> Prototyping, Game Balancing, Version Control, Agile Development</p>
             </div>
         </section>
     </div>
@@ -430,23 +820,47 @@
     </footer>
 
     <script>
+        let currentSlide = 0;
+
         function showPage(pageId) {
-            // Hide all sections
             document.querySelectorAll('section').forEach(section => {
                 section.classList.remove('active');
             });
             
-            // Show the selected section
             const targetSection = document.getElementById(pageId);
             if (targetSection) {
                 targetSection.classList.add('active');
             }
             
-            // Scroll to top smoothly
             window.scrollTo({top: 0, behavior: 'smooth'});
         }
 
-        // Header and footer scroll behavior
+        function changeSlide(direction) {
+            const slides = document.querySelectorAll('.slide');
+            const indicators = document.querySelectorAll('.indicator-dot');
+            
+            slides[currentSlide].classList.remove('active-slide');
+            indicators[currentSlide].classList.remove('active');
+            
+            currentSlide = (currentSlide + direction + slides.length) % slides.length;
+            
+            slides[currentSlide].classList.add('active-slide');
+            indicators[currentSlide].classList.add('active');
+        }
+
+        function goToSlide(index) {
+            const slides = document.querySelectorAll('.slide');
+            const indicators = document.querySelectorAll('.indicator-dot');
+            
+            slides[currentSlide].classList.remove('active-slide');
+            indicators[currentSlide].classList.remove('active');
+            
+            currentSlide = index;
+            
+            slides[currentSlide].classList.add('active-slide');
+            indicators[currentSlide].classList.add('active');
+        }
+
         let lastScrollTop = 0;
         let scrollTimeout;
         const header = document.querySelector('header');
@@ -455,7 +869,6 @@
         window.addEventListener('scroll', () => {
             const st = window.pageYOffset || document.documentElement.scrollTop;
             
-            // Hide/show header on scroll
             if (st > lastScrollTop && st > 100) {
                 header.style.top = '-200px';
             } else {
@@ -464,21 +877,17 @@
             
             lastScrollTop = st <= 0 ? 0 : st;
             
-            // Hide footer immediately when scrolling
             footer.style.bottom = '-100px';
             
-            // Show footer after scrolling stops
             clearTimeout(scrollTimeout);
             scrollTimeout = setTimeout(() => {
                 footer.style.bottom = '0';
             }, 200);
         });
 
-        // Initialize page
         document.addEventListener('DOMContentLoaded', () => {
             showPage('home');
         });
     </script>
 </body>
 </html>
-
