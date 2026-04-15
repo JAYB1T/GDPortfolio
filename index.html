@@ -1,1053 +1,775 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Jaylen Williams Portfolio</title>
-    <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Cdefs%3E%3ClinearGradient id='grad' x1='0%25' y1='0%25' x2='100%25' y2='100%25'%3E%3Cstop offset='0%25' style='stop-color:%230b1d51;stop-opacity:1' /%3E%3Cstop offset='100%25' style='stop-color:%231e3a8a;stop-opacity:1' /%3E%3C/linearGradient%3E%3C/defs%3E%3Crect width='100' height='100' rx='15' fill='url(%23grad)'/%3E%3Ctext x='50' y='70' font-family='Inter, Arial, sans-serif' font-size='45' font-weight='700' fill='white' text-anchor='middle'%3EJW%3C/text%3E%3C/svg%3E">
-    <style>
-        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap');
-        
-        body {
-            font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', system-ui, sans-serif;
-            margin: 0;
-            background: linear-gradient(to bottom, #000000, #121212);
-            color: white;
-            line-height: 1.6;
-            padding-top: 75px;
-        }
-
-        p, li, span, a, div {
-            font-size: 20px;
-        }
-
-        header {
-            background: linear-gradient(to right, #0b1d51, #1e3a8a);
-            padding: 1em 2em;
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            position: fixed;
-            top: 0;
-            left: 0;
-            right: 0;
-            width: 100%;
-            transition: top 0.4s ease;
-            z-index: 1000;
-            box-sizing: border-box;
-        }
-
-        .site-name {
-            font-weight: 700;
-            font-size: 1.5em;
-            color: white;
-            text-decoration: none;
-            display: inline-block;
-            cursor: pointer;
-            text-align: left;
-            transition: opacity 0.2s ease-in-out, transform 0.2s ease-in-out;
-            transform-origin: left center;
-        }
-
-        .site-name:hover {
-            opacity: 0.85;
-            transform: scale(1.05);
-        }
-
-        .site-name .main-name {
-            display: block;
-            font-size: 1.5rem;
-            font-weight: 700;
-            line-height: 1.2;
-        }
-
-        .site-name .subtitle {
-            display: block;
-            font-size: 0.9rem;
-            font-weight: 400;
-            opacity: 0.85;
-            margin-top: 2px;
-        }
-
-        nav {
-            margin-right: 20px;
-        }
-
-        nav a {
-            color: white;
-            margin: 0 15px;
-            text-decoration: none;
-            font-weight: bold;
-            font-size: 1.3em;
-            padding: 5px 10px;
-            border-radius: 4px;
-            transition: background-color 0.3s ease;
-            cursor: pointer;
-        }
-
-        nav a:hover {
-            background-color: rgba(255, 255, 255, 0.1);
-        }
-
-        h1 {
-            font-size: 2.5em;
-            font-weight: 700;
-            margin-bottom: 1em;
-            margin-top: 0.2em;
-            letter-spacing: -0.02em;
-        }
-
-        h2 {
-            font-size: 2em;
-            font-weight: 600;
-            margin-top: 0.5em;
-            margin-bottom: 0.5em;
-            letter-spacing: -0.01em;
-        }
-
-        h3 {
-            font-size: 1.5em;
-            font-weight: 600;
-            margin-top: 1em;
-            margin-bottom: 0.5em;
-        }
-
-        .container {
-            padding: 1.5em 2em 4em;
-            min-height: calc(100vh - 200px);
-        }
-
-        /* Featured Project Section */
-        .featured-project {
-            background: linear-gradient(135deg, rgba(11, 29, 81, 0.3), rgba(30, 58, 138, 0.3));
-            border: 2px solid rgba(30, 58, 138, 0.5);
-            border-radius: 12px;
-            padding: 2em;
-            margin-bottom: 3em;
-            transition: transform 0.3s ease, box-shadow 0.3s ease;
-        }
-
-        .featured-project:hover {
-            transform: translateY(-5px);
-            box-shadow: 0 15px 40px rgba(30, 58, 138, 0.4);
-        }
-
-        .featured-badge {
-            display: inline-block;
-            background: linear-gradient(to right, #1e3a8a, #3b82f6);
-            padding: 8px 16px;
-            border-radius: 20px;
-            font-size: 0.9em;
-            font-weight: 600;
-            margin-bottom: 1em;
-        }
-
-        /* Slideshow styles */
-        .slideshow-container {
-            position: relative;
-        }
-
-        .slide {
-            display: none;
-            animation: fadeIn 0.5s ease-in-out;
-        }
-
-        .slide.active-slide {
-            display: block;
-        }
-
-        .slideshow-nav {
-            position: absolute;
-            top: 50%;
-            transform: translateY(-50%);
-            background: rgba(30, 58, 138, 0.7);
-            color: white;
-            border: none;
-            font-size: 2em;
-            padding: 15px 20px;
-            cursor: pointer;
-            border-radius: 5px;
-            transition: background 0.3s ease, transform 0.3s ease;
-            z-index: 10;
-        }
-
-        .slideshow-nav:hover {
-            background: rgba(30, 58, 138, 1);
-            transform: translateY(-50%) scale(1.1);
-        }
-
-        .slideshow-nav.prev {
-            left: -60px;
-        }
-
-        .slideshow-nav.next {
-            right: -60px;
-        }
-
-        .slideshow-indicators {
-            text-align: center;
-            margin-top: 20px;
-        }
-
-        .indicator-dot {
-            display: inline-block;
-            width: 12px;
-            height: 12px;
-            border-radius: 50%;
-            background: rgba(255, 255, 255, 0.3);
-            margin: 0 5px;
-            cursor: pointer;
-            transition: background 0.3s ease, transform 0.3s ease;
-        }
-
-        .indicator-dot.active {
-            background: #3b82f6;
-            transform: scale(1.3);
-        }
-
-        .indicator-dot:hover {
-            background: rgba(255, 255, 255, 0.6);
-        }
-
-        .project-buttons {
-            margin-top: 15px;
-        }
-
-        .project-buttons a {
-            display: inline-block;
-            background: linear-gradient(to right, #0b1d51, #1e3a8a);
-            color: white;
-            padding: 10px 20px;
-            text-decoration: none;
-            border-radius: 5px;
-            transition: transform 0.3s ease, box-shadow 0.3s ease;
-            margin-right: 10px;
-            margin-bottom: 10px;
-        }
-
-        .project-buttons a:hover {
-            transform: translateY(-2px);
-            box-shadow: 0 5px 15px rgba(30, 58, 138, 0.4);
-        }
-
-        .project-buttons a.secondary {
-            background: linear-gradient(to right, #1e3a8a, #3b82f6);
-        }
-
-        .placeholder-image {
-            width: 100%;
-            max-width: 500px;
-            height: 300px;
-            display: block;
-            margin: 1.5em auto;
-            border-radius: 8px;
-            background: linear-gradient(135deg, rgba(30, 58, 138, 0.3), rgba(59, 130, 246, 0.3));
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-size: 2em;
-            color: rgba(255, 255, 255, 0.5);
-            border: 2px dashed rgba(255, 255, 255, 0.3);
-        }
-
-        .featured-project img {
-            width: 100%;
-            max-width: 500px;
-            display: block;
-            margin: 1.5em auto;
-            border-radius: 8px;
-            box-shadow: 0 8px 20px rgba(0, 0, 0, 0.3);
-            transition: transform 0.3s ease, filter 0.3s ease;
-            cursor: pointer;
-        }
-
-        .featured-project img:hover {
-            transform: scale(1.05);
-            filter: brightness(1.2);
-        }
-
-        .featured-image-container {
-            position: relative;
-            width: 100%;
-            max-width: 500px;
-            margin: 1.5em auto;
-        }
-
-        .featured-image-container img {
-            width: 100%;
-            display: block;
-            border-radius: 8px;
-            box-shadow: 0 8px 20px rgba(0, 0, 0, 0.3);
-            transition: transform 0.3s ease, filter 0.3s ease;
-            cursor: pointer;
-        }
-
-        .featured-image-container .static-image {
-            position: relative;
-            z-index: 2;
-        }
-
-        .featured-image-container .gif-image {
-            position: absolute;
-            top: 0;
-            left: 0;
-            opacity: 0;
-            z-index: 1;
-            transition: opacity 0.3s ease;
-        }
-
-        .featured-image-container:hover .static-image {
-            opacity: 0;
-        }
-
-        .featured-image-container:hover .gif-image {
-            opacity: 1;
-        }
-
-        .featured-image-container:hover img {
-            transform: scale(1.05);
-            filter: brightness(1.2);
-        }
-
-        .project-video {
-            width: 100%;
-            max-width: 600px;
-            height: 340px;
-            margin: 1.5em auto;
-            display: block;
-            border-radius: 8px;
-            box-shadow: 0 8px 20px rgba(0, 0, 0, 0.3);
-        }
-
-        .upcoming-badge {
-            display: inline-block;
-            background: linear-gradient(to right, #ea580c, #dc2626);
-            padding: 8px 16px;
-            border-radius: 20px;
-            font-size: 0.9em;
-            font-weight: 600;
-            margin-bottom: 1em;
-        }
-
-        /* About Me Summary */
-        .about-summary {
-            background-color: rgba(255, 255, 255, 0.03);
-            padding: 1.5em;
-            border-radius: 10px;
-            margin-bottom: 2em;
-            border-left: 4px solid rgba(30, 58, 138, 0.6);
-        }
-
-        .read-more-link {
-            display: inline-block;
-            color: #60a5fa;
-            text-decoration: none;
-            font-weight: 600;
-            margin-top: 1em;
-            transition: color 0.3s ease;
-        }
-
-        .read-more-link:hover {
-            color: #93c5fd;
-            text-decoration: underline;
-        }
-
-        /* About Me Full Page */
-        .about-grid {
-            display: grid;
-            grid-template-columns: 1fr 1fr;
-            grid-template-rows: auto auto;
-            gap: 2em;
-            margin-top: 1em;
-        }
-
-        .about-section {
-            background-color: rgba(255, 255, 255, 0.03);
-            padding: 1.5em;
-            border-radius: 10px;
-            transition: transform 0.3s ease, box-shadow 0.3s ease;
-            border-left: 4px solid rgba(30, 58, 138, 0.6);
-        }
-
-        .about-section:hover {
-            transform: translateY(-3px);
-            box-shadow: 0 8px 25px rgba(0, 0, 0, 0.2);
-            border-left-color: rgba(30, 58, 138, 1);
-        }
-
-        .about-section.full-width {
-            grid-column: 1 / -1;
-        }
-
-        /* Project Cards */
-        .project {
-            margin-bottom: 3em;
-            background-color: rgba(255, 255, 255, 0.02);
-            padding: 1.5em;
-            border-radius: 10px;
-            transition: transform 0.3s ease, box-shadow 0.3s ease;
-            border: 1px solid rgba(255, 255, 255, 0.05);
-        }
-
-        .project:hover {
-            transform: translateY(-5px);
-            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
-            border-color: rgba(30, 58, 138, 0.3);
-        }
-
-        .project img {
-            width: 100%;
-            max-width: 400px;
-            display: block;
-            margin: 1em auto;
-            border-radius: 8px;
-            transition: transform 0.3s ease, filter 0.3s ease;
-        }
-
-        .project img:hover {
-            transform: scale(1.05);
-            filter: brightness(1.2);
-        }
-
-        .project-description {
-            background-color: rgba(255, 255, 255, 0.05);
-            padding: 15px;
-            border-radius: 5px;
-            margin: 15px 0;
-            line-height: 1.6;
-        }
-
-        .project-meta {
-            display: flex;
-            flex-wrap: wrap;
-            gap: 10px;
-            margin: 15px 0;
-        }
-
-        .meta-tag {
-            background-color: rgba(30, 58, 138, 0.3);
-            padding: 6px 12px;
-            border-radius: 4px;
-            font-size: 0.9em;
-            font-weight: 500;
-        }
-
-        .project-highlights {
-            background-color: rgba(255, 255, 255, 0.03);
-            padding: 15px;
-            border-radius: 5px;
-            margin: 15px 0;
-        }
-
-        .project-highlights h3 {
-            margin-top: 0;
-            font-size: 1.2em;
-        }
-
-        .project-highlights ul {
-            margin: 10px 0;
-            padding-left: 20px;
-        }
-
-        .project-highlights li {
-            margin-bottom: 8px;
-        }
-
-        .project a {
-            display: inline-block;
-            background: linear-gradient(to right, #0b1d51, #1e3a8a);
-            color: white;
-            padding: 10px 20px;
-            text-decoration: none;
-            border-radius: 5px;
-            transition: transform 0.3s ease, box-shadow 0.3s ease;
-            margin-top: 10px;
-            margin-right: 10px;
-        }
-
-        .project a:hover {
-            transform: translateY(-2px);
-            box-shadow: 0 5px 15px rgba(30, 58, 138, 0.4);
-        }
-
-        footer {
-            background: linear-gradient(to right, #0b1d51, #1e3a8a);
-            padding: 1em;
-            text-align: center;
-            position: fixed;
-            bottom: -100px;
-            left: 0;
-            right: 0;
-            width: 100%;
-            transition: bottom 0.4s ease;
-            box-sizing: border-box;
-        }
-
-        footer a {
-            margin: 0 10px;
-            display: inline-block;
-        }
-
-        footer img {
-            width: 30px;
-            height: 30px;
-            vertical-align: middle;
-            transition: transform 0.3s ease, filter 0.3s ease;
-        }
-
-        footer img:hover {
-            transform: scale(1.2);
-            filter: brightness(1.2);
-        }
-
-        section {
-            display: none;
-            animation: fadeIn 0.5s ease-in-out;
-        }
-
-        section.active {
-            display: block;
-        }
-
-        @keyframes fadeIn {
-            from { opacity: 0; }
-            to { opacity: 1; }
-        }
-
-        .resume-link {
-            display: inline-block;
-            background: linear-gradient(to right, #0b1d51, #1e3a8a);
-            color: white;
-            padding: 15px 30px;
-            text-decoration: none;
-            border-radius: 8px;
-            margin: 20px 0;
-            transition: transform 0.3s ease, box-shadow 0.3s ease;
-            font-size: 1.1em;
-            font-weight: bold;
-        }
-
-        .resume-link:hover {
-            transform: translateY(-2px);
-            box-shadow: 0 8px 25px rgba(30, 58, 138, 0.4);
-        }
-
-        .resume-section {
-            background-color: rgba(255, 255, 255, 0.05);
-            padding: 20px;
-            border-radius: 10px;
-            margin: 20px 0;
-        }
-
-        /* Responsive Design */
-        @media (max-width: 768px) {
-            header {
-                flex-direction: column;
-                padding: 1em;
-                left: 0;
-                right: 0;
-                width: 100%;
-            }
-
-            nav {
-                margin: 10px 0 0 0;
-            }
-
-            nav a {
-                margin: 0 10px;
-                font-size: 1.1em;
-            }
-
-            body {
-                padding-top: 110px;
-            }
-
-            .about-grid {
-                grid-template-columns: 1fr;
-                gap: 1.5em;
-            }
-
-            .container {
-                padding: 1.5em 1em 4em;
-            }
-
-            h1 {
-                font-size: 2em;
-            }
-
-            h2 {
-                font-size: 1.6em;
-            }
-
-            p, li, span, a, div {
-                font-size: 18px;
-            }
-
-            .slideshow-nav.prev {
-                left: 5px;
-            }
-
-            .slideshow-nav.next {
-                right: 5px;
-            }
-
-            .slideshow-nav {
-                font-size: 1.5em;
-                padding: 10px 15px;
-            }
-
-            .about-section.full-width > div[style*="grid"] {
-                grid-template-columns: 1fr !important;
-            }
-        }
-    </style>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Jaylen Williams | Game Designer</title>
+<link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Cdefs%3E%3ClinearGradient id='g' x1='0' y1='0' x2='1' y2='1'%3E%3Cstop offset='0%25' stop-color='%230d0059'/%3E%3Cstop offset='100%25' stop-color='%234a2fff'/%3E%3C/linearGradient%3E%3C/defs%3E%3Ctext x='32' y='46' font-family='Georgia,serif' font-weight='700' font-size='34' fill='url(%23g)' text-anchor='middle' letter-spacing='-1'%3EJW%3C/text%3E%3C/svg%3E">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;500;600;700;800&family=Source+Sans+3:ital,wght@0,300;0,400;0,500;0,600;1,400&display=swap" rel="stylesheet">
+<style>
+/* ═══════════════ RESET & VARIABLES ═══════════════ */
+*,*::before,*::after{margin:0;padding:0;box-sizing:border-box}
+:root{
+  --black:#000000;
+  --deep-blue:#0d0059;
+  --blue-glow:#1a0a8c;
+  --blue-accent:#4a2fff;
+  --blue-light:#7b5cff;
+  --text-primary:#e8e6f0;
+  --text-secondary:#9994b8;
+  --text-muted:#6b6588;
+  --surface:#0a0a12;
+  --surface-raised:#111122;
+  --surface-card:#0e0e1e;
+  --border:#1a1a33;
+  --font-display:'Syne',sans-serif;
+  --font-body:'Source Sans 3',sans-serif;
+  --ease-out-expo:cubic-bezier(0.16,1,0.3,1);
+  --ease-spring:cubic-bezier(0.34,1.56,0.64,1);
+}
+html{scroll-behavior:smooth;background:var(--black);color:var(--text-primary)}
+body{font-family:var(--font-body);background:var(--black);overflow-x:hidden;min-height:100vh}
+a{color:inherit;text-decoration:none}
+img{display:block;max-width:100%}
+button{font-family:inherit;cursor:pointer;border:none;background:none;color:inherit}
+
+/* ═══════════════ BACKGROUND ATMOSPHERE ═══════════════ */
+body::before{
+  content:'';position:fixed;top:0;left:0;width:100%;height:100%;
+  background:radial-gradient(ellipse 80% 60% at 50% -10%,rgba(13,0,89,0.35),transparent 70%),
+             radial-gradient(ellipse 50% 40% at 80% 100%,rgba(13,0,89,0.15),transparent 60%);
+  pointer-events:none;z-index:0
+}
+
+/* ═══════════════ HEADER ═══════════════ */
+.header{
+  position:fixed;top:0;left:0;right:0;z-index:1000;
+  padding:1.25rem 2.5rem;
+  display:flex;align-items:center;justify-content:space-between;
+  background:linear-gradient(180deg,rgba(0,0,0,0.95) 0%,rgba(0,0,0,0.7) 70%,transparent 100%);
+  backdrop-filter:blur(12px);-webkit-backdrop-filter:blur(12px);
+  transition:transform 0.5s var(--ease-out-expo),opacity 0.5s var(--ease-out-expo);
+  will-change:transform
+}
+.header.hidden{transform:translateY(-100%);opacity:0}
+
+.brand{cursor:pointer;position:relative;padding:0.4rem 0.6rem;border-radius:8px;transition:all 0.4s var(--ease-out-expo)}
+.brand:hover{background:rgba(13,0,89,0.25)}
+.brand:hover::after{
+  content:'';position:absolute;inset:-4px;border-radius:12px;
+  background:radial-gradient(ellipse at center,rgba(74,47,255,0.2),transparent 70%);
+  filter:blur(8px);z-index:-1;animation:glowPulse 2s ease-in-out infinite
+}
+.brand-name{font-family:var(--font-display);font-size:1.35rem;font-weight:800;letter-spacing:-0.02em;line-height:1.1;
+  background:linear-gradient(135deg,#fff 0%,var(--text-primary) 100%);-webkit-background-clip:text;-webkit-text-fill-color:transparent}
+.brand-title{font-size:0.72rem;font-weight:500;letter-spacing:0.18em;text-transform:uppercase;color:var(--text-muted);margin-top:2px}
+
+@keyframes glowPulse{0%,100%{opacity:0.6}50%{opacity:1}}
+
+.nav{display:flex;align-items:center;gap:0.25rem}
+.nav-link{
+  font-family:var(--font-display);font-size:0.82rem;font-weight:600;letter-spacing:0.1em;text-transform:uppercase;
+  padding:0.55rem 1.1rem;border-radius:6px;position:relative;
+  color:var(--text-secondary);transition:all 0.3s ease
+}
+.nav-link:hover,.nav-link.active{color:#fff}
+.nav-link::after{
+  content:'';position:absolute;bottom:6px;left:50%;transform:translateX(-50%) scaleX(0);
+  width:20px;height:2px;background:var(--blue-accent);border-radius:1px;
+  transition:transform 0.3s var(--ease-out-expo)
+}
+.nav-link:hover::after,.nav-link.active::after{transform:translateX(-50%) scaleX(1)}
+
+/* ═══════════════ FOOTER ═══════════════ */
+.footer{
+  position:fixed;bottom:0;left:0;right:0;z-index:999;
+  padding:1rem 2.5rem;
+  display:flex;align-items:center;justify-content:center;gap:2rem;
+  background:linear-gradient(0deg,rgba(0,0,0,0.95) 0%,rgba(0,0,0,0.6) 70%,transparent 100%);
+  backdrop-filter:blur(8px);-webkit-backdrop-filter:blur(8px);
+  transition:transform 0.5s var(--ease-out-expo),opacity 0.5s var(--ease-out-expo);
+  will-change:transform
+}
+.footer.hidden{transform:translateY(100%);opacity:0}
+
+.footer-link{
+  display:flex;align-items:center;gap:0.5rem;
+  color:var(--text-muted);font-size:0.8rem;font-weight:500;letter-spacing:0.05em;
+  transition:color 0.3s ease,transform 0.3s var(--ease-spring)
+}
+.footer-link:hover{color:var(--blue-light);transform:translateY(-2px)}
+.footer-link svg{width:22px;height:22px;fill:currentColor;transition:fill 0.3s ease}
+
+/* ═══════════════ MAIN CONTENT ═══════════════ */
+.main{position:relative;z-index:1;min-height:100vh;padding-top:80px;padding-bottom:80px}
+.page{display:none;animation:pageFadeIn 0.6s var(--ease-out-expo)}
+.page.active{display:block}
+@keyframes pageFadeIn{from{opacity:0;transform:translateY(20px)}to{opacity:1;transform:translateY(0)}}
+
+.container{max-width:1200px;margin:0 auto;padding:0 2rem}
+.section-label{
+  font-family:var(--font-display);font-size:0.7rem;font-weight:700;letter-spacing:0.25em;text-transform:uppercase;
+  color:var(--blue-accent);margin-bottom:0.75rem
+}
+.section-title{
+  font-family:var(--font-display);font-size:clamp(2rem,4vw,3rem);font-weight:800;letter-spacing:-0.03em;
+  line-height:1.1;margin-bottom:1rem;
+  background:linear-gradient(135deg,#fff 30%,var(--blue-light));-webkit-background-clip:text;-webkit-text-fill-color:transparent
+}
+.section-desc{font-size:1.05rem;color:var(--text-secondary);line-height:1.7;max-width:640px}
+
+/* ═══════════════ HOME — FEATURED SLIDESHOW ═══════════════ */
+.hero{padding:3rem 0 4rem}
+.slideshow{position:relative;width:100%;max-width:1000px;margin:0 auto}
+.slideshow-track{position:relative;width:100%;aspect-ratio:16/9;border-radius:16px;overflow:hidden;
+  background:var(--surface);border:1px solid var(--border)}
+.slide{
+  position:absolute;inset:0;opacity:0;transition:opacity 0.8s ease,transform 0.8s var(--ease-out-expo);
+  transform:scale(1.02);display:flex;flex-direction:column;justify-content:flex-end
+}
+.slide.active{opacity:1;transform:scale(1)}
+.slide-media{position:absolute;inset:0;width:100%;height:100%;object-fit:cover}
+.slide-overlay{
+  position:absolute;inset:0;
+  background:linear-gradient(0deg,rgba(0,0,0,0.85) 0%,rgba(0,0,0,0.2) 40%,rgba(13,0,89,0.08) 100%)
+}
+.slide-content{position:relative;z-index:2;padding:2rem 2.5rem}
+.slide-badge{
+  display:inline-block;font-family:var(--font-display);font-size:0.65rem;font-weight:700;
+  letter-spacing:0.2em;text-transform:uppercase;
+  padding:0.3rem 0.8rem;border-radius:4px;margin-bottom:0.75rem;
+  background:rgba(74,47,255,0.25);color:var(--blue-light);border:1px solid rgba(74,47,255,0.3)
+}
+.slide-badge.dev{background:rgba(255,165,0,0.15);color:#ffa500;border-color:rgba(255,165,0,0.3)}
+.slide-title{font-family:var(--font-display);font-size:clamp(1.5rem,3vw,2.2rem);font-weight:800;letter-spacing:-0.02em;margin-bottom:0.4rem}
+.slide-role{font-size:0.85rem;color:var(--text-muted);font-weight:500;margin-bottom:0.5rem}
+.slide-desc{font-size:0.95rem;color:var(--text-secondary);line-height:1.6;max-width:560px}
+
+.slideshow-nav{display:flex;justify-content:center;gap:0.6rem;margin-top:1.25rem}
+.slideshow-dot{
+  width:32px;height:4px;border-radius:2px;background:var(--border);cursor:pointer;
+  transition:all 0.4s var(--ease-out-expo)
+}
+.slideshow-dot.active{width:48px;background:var(--blue-accent)}
+.slideshow-arrows{position:absolute;top:50%;left:0;right:0;display:flex;justify-content:space-between;
+  padding:0 0.75rem;transform:translateY(-50%);z-index:5;pointer-events:none}
+.slide-arrow{
+  pointer-events:all;width:40px;height:40px;border-radius:50%;
+  background:rgba(0,0,0,0.6);border:1px solid var(--border);
+  display:flex;align-items:center;justify-content:center;
+  color:var(--text-secondary);font-size:1.1rem;
+  transition:all 0.3s ease;backdrop-filter:blur(4px)
+}
+.slide-arrow:hover{background:rgba(13,0,89,0.6);color:#fff;border-color:var(--blue-accent)}
+
+/* ═══════════════ PROJECTS PAGE ═══════════════ */
+.projects-page{padding:3rem 0}
+.projects-grid{
+  display:grid;grid-template-columns:repeat(2,1fr);gap:1.75rem;margin-top:2.5rem
+}
+.project-card{
+  position:relative;border-radius:14px;overflow:hidden;
+  background:var(--surface-card);border:1px solid var(--border);
+  transition:all 0.5s var(--ease-out-expo);cursor:pointer
+}
+.project-card:hover{transform:translateY(-6px);border-color:rgba(74,47,255,0.35);
+  box-shadow:0 20px 60px rgba(13,0,89,0.25),0 0 0 1px rgba(74,47,255,0.15)}
+
+.card-media{position:relative;width:100%;aspect-ratio:16/9;overflow:hidden;background:#080814}
+.card-media img{width:100%;height:100%;object-fit:cover;transition:opacity 0.4s ease}
+.card-media .card-gif{
+  position:absolute;inset:0;width:100%;height:100%;object-fit:cover;
+  opacity:0;transition:opacity 0.4s ease
+}
+.project-card:hover .card-media img{opacity:0}
+.project-card:hover .card-media .card-gif{opacity:1}
+.card-play-icon{
+  position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);
+  width:48px;height:48px;border-radius:50%;
+  background:rgba(0,0,0,0.6);border:2px solid rgba(255,255,255,0.3);
+  display:flex;align-items:center;justify-content:center;
+  opacity:0;transition:opacity 0.3s ease;pointer-events:none
+}
+.project-card:hover .card-play-icon{opacity:1}
+.card-play-icon::after{content:'';width:0;height:0;border-left:14px solid #fff;border-top:8px solid transparent;border-bottom:8px solid transparent;margin-left:3px}
+
+.card-info{padding:1.25rem 1.5rem 1.5rem}
+.card-title{font-family:var(--font-display);font-size:1.2rem;font-weight:700;letter-spacing:-0.01em;margin-bottom:0.3rem}
+.card-role{font-size:0.78rem;color:var(--blue-light);font-weight:600;letter-spacing:0.08em;text-transform:uppercase;margin-bottom:0.6rem}
+.card-desc{font-size:0.88rem;color:var(--text-secondary);line-height:1.6}
+.card-tags{display:flex;flex-wrap:wrap;gap:0.4rem;margin-top:0.85rem}
+.card-tag{
+  font-size:0.68rem;font-weight:600;letter-spacing:0.06em;text-transform:uppercase;
+  padding:0.25rem 0.6rem;border-radius:4px;
+  background:rgba(13,0,89,0.3);color:var(--text-muted);border:1px solid var(--border)
+}
+.itch-link{
+  display:inline-flex;align-items:center;gap:0.5rem;margin-top:1rem;
+  font-family:var(--font-display);font-size:0.78rem;font-weight:700;letter-spacing:0.06em;text-transform:uppercase;
+  color:var(--blue-light);padding:0.45rem 1rem;border-radius:6px;
+  background:rgba(74,47,255,0.1);border:1px solid rgba(74,47,255,0.25);
+  transition:all 0.3s var(--ease-spring)
+}
+.itch-link:hover{background:rgba(74,47,255,0.2);border-color:var(--blue-accent);transform:translateY(-1px);
+  box-shadow:0 4px 16px rgba(74,47,255,0.2)}
+.itch-link svg{width:16px;height:16px;fill:currentColor}
+
+.welcome-section{max-width:700px}
+.cta-btn{
+  display:inline-flex;align-items:center;gap:0.6rem;
+  padding:0.85rem 2rem;border-radius:8px;
+  font-family:var(--font-display);font-size:0.85rem;font-weight:700;letter-spacing:0.1em;text-transform:uppercase;
+  background:linear-gradient(135deg,var(--deep-blue),var(--blue-accent));
+  color:#fff;border:1px solid rgba(74,47,255,0.4);
+  transition:all 0.3s var(--ease-spring);
+  box-shadow:0 4px 20px rgba(74,47,255,0.25)
+}
+.cta-btn:hover{transform:translateY(-2px);box-shadow:0 8px 30px rgba(74,47,255,0.4)}
+
+/* ═══════════════ ABOUT PAGE ═══════════════ */
+.about-page{padding:3rem 0}
+.about-section{margin-bottom:3.5rem}
+.about-section-title{
+  font-family:var(--font-display);font-size:1.5rem;font-weight:700;letter-spacing:-0.01em;
+  margin-bottom:1rem;padding-bottom:0.75rem;
+  border-bottom:1px solid var(--border);color:var(--text-primary)
+}
+.about-text{font-size:1rem;color:var(--text-secondary);line-height:1.8;max-width:720px}
+
+.top5-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:1.5rem;margin-top:1.25rem}
+.top5-card{
+  background:var(--surface-card);border:1px solid var(--border);border-radius:12px;
+  padding:1.25rem 1.5rem;transition:all 0.3s ease
+}
+.top5-card:hover{border-color:rgba(74,47,255,0.3);background:rgba(13,0,89,0.12)}
+.top5-category{
+  font-family:var(--font-display);font-size:0.95rem;font-weight:700;margin-bottom:0.75rem;
+  color:var(--blue-light)
+}
+.top5-list{list-style:none;counter-reset:top5}
+.top5-list li{
+  counter-increment:top5;padding:0.35rem 0;font-size:0.9rem;color:var(--text-secondary);
+  display:flex;align-items:center;gap:0.6rem;border-bottom:1px solid rgba(255,255,255,0.04)
+}
+.top5-list li:last-child{border-bottom:none}
+.top5-list li::before{
+  content:counter(top5);font-family:var(--font-display);font-weight:800;font-size:0.75rem;
+  color:var(--blue-accent);min-width:18px
+}
+
+/* ═══════════════ RESUME PAGE ═══════════════ */
+.resume-page{padding:3rem 0}
+.resume-section{margin-bottom:3rem}
+.resume-section-title{
+  font-family:var(--font-display);font-size:1.3rem;font-weight:700;letter-spacing:-0.01em;
+  margin-bottom:1.25rem;padding-bottom:0.6rem;
+  border-bottom:1px solid var(--border);color:var(--text-primary);
+  display:flex;align-items:center;gap:0.6rem
+}
+.resume-section-title .icon{color:var(--blue-accent);font-size:1.1rem}
+
+.edu-item{
+  background:var(--surface-card);border:1px solid var(--border);border-radius:12px;
+  padding:1.5rem 1.75rem;margin-bottom:1rem;transition:all 0.3s ease
+}
+.edu-item:hover{border-color:rgba(74,47,255,0.3)}
+.edu-school{font-family:var(--font-display);font-size:1.1rem;font-weight:700;margin-bottom:0.2rem}
+.edu-degree{font-size:0.95rem;color:var(--text-secondary)}
+.edu-date{font-size:0.8rem;color:var(--text-muted);margin-top:0.3rem}
+
+.skills-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:1rem}
+.skill-group{
+  background:var(--surface-card);border:1px solid var(--border);border-radius:12px;
+  padding:1.25rem 1.5rem;transition:all 0.3s ease
+}
+.skill-group:hover{border-color:rgba(74,47,255,0.3)}
+.skill-group-title{font-family:var(--font-display);font-size:0.85rem;font-weight:700;color:var(--blue-light);
+  letter-spacing:0.08em;text-transform:uppercase;margin-bottom:0.75rem}
+.skill-item{font-size:0.88rem;color:var(--text-secondary);padding:0.25rem 0}
+
+.download-btn{
+  display:inline-flex;align-items:center;gap:0.6rem;margin-top:1.5rem;
+  padding:0.85rem 2rem;border-radius:8px;
+  font-family:var(--font-display);font-size:0.85rem;font-weight:700;letter-spacing:0.1em;text-transform:uppercase;
+  background:linear-gradient(135deg,var(--deep-blue),var(--blue-accent));
+  color:#fff;border:1px solid rgba(74,47,255,0.4);
+  transition:all 0.3s var(--ease-spring);
+  box-shadow:0 4px 20px rgba(74,47,255,0.25)
+}
+.download-btn:hover{
+  transform:translateY(-2px);
+  box-shadow:0 8px 30px rgba(74,47,255,0.4)
+}
+.download-btn svg{width:18px;height:18px}
+
+/* ═══════════════ LOADING / TRANSITIONS ═══════════════ */
+.page-loader{
+  position:fixed;inset:0;z-index:9999;background:var(--black);
+  display:flex;align-items:center;justify-content:center;
+  transition:opacity 0.6s ease;pointer-events:none
+}
+.page-loader.done{opacity:0}
+.loader-logo{
+  font-family:var(--font-display);font-size:3rem;font-weight:800;
+  background:linear-gradient(135deg,var(--deep-blue),var(--blue-accent));
+  -webkit-background-clip:text;-webkit-text-fill-color:transparent;
+  animation:loaderPulse 1.2s ease-in-out infinite
+}
+@keyframes loaderPulse{0%,100%{opacity:0.4;transform:scale(0.96)}50%{opacity:1;transform:scale(1)}}
+
+/* ═══════════════ SCROLL REVEAL ═══════════════ */
+.reveal{opacity:0;transform:translateY(30px);transition:all 0.7s var(--ease-out-expo)}
+.reveal.visible{opacity:1;transform:translateY(0)}
+
+/* ═══════════════ RESPONSIVE ═══════════════ */
+@media(max-width:900px){
+  .projects-grid{grid-template-columns:1fr}
+  .skills-grid{grid-template-columns:repeat(2,1fr)}
+  .top5-grid{grid-template-columns:1fr}
+}
+@media(max-width:640px){
+  .header{padding:1rem 1.25rem}
+  .brand-name{font-size:1.1rem}
+  .brand-title{font-size:0.62rem}
+  .nav{gap:0}
+  .nav-link{font-size:0.7rem;padding:0.5rem 0.7rem;letter-spacing:0.06em}
+  .container{padding:0 1.25rem}
+  .slide-content{padding:1.25rem 1.5rem}
+  .slide-title{font-size:1.2rem}
+  .slide-desc{font-size:0.85rem}
+  .skills-grid{grid-template-columns:1fr}
+  .footer{padding:0.75rem 1.25rem;gap:1.25rem}
+  .card-info{padding:1rem 1.25rem 1.25rem}
+}
+</style>
 </head>
 <body>
-    <header>
-        <a href="#home" class="site-name" onclick="showPage('home'); window.scrollTo({top:0, behavior:'smooth'}); return false;">
-            <span class="main-name">Jaylen Williams</span>
-            <span class="subtitle">Game Developer</span>
-        </a>
-        <nav>
-            <a onclick="showPage('home')">Home</a>
-            <a onclick="showPage('projects')">Projects</a>
-            <a onclick="showPage('about')">About Me</a>
-            <a onclick="showPage('resume')">Resume</a>
-        </nav>
-    </header>
 
-    <div class="container">
-        <section id="home" class="active">
-            <h1>Featured Project</h1>
-            
-            <div class="featured-project">
-                <div class="slideshow-container">
-                    <button class="slideshow-nav prev" onclick="changeSlide(-1)">‹</button>
-                    <button class="slideshow-nav next" onclick="changeSlide(1)">›</button>
+<!-- LOADER -->
+<div class="page-loader" id="loader"><span class="loader-logo">JW</span></div>
 
-                    <!-- Slide 1: Featured Game -->
-                    <div class="slide active-slide">
-                        <span class="featured-badge">Latest Work</span>
-                        <h2>The Final Handgun</h2>
-                        <div class="featured-image-container">
-                            <img src="https://img.itch.zone/aW1nLzIwOTkwOTA1LnBuZw==/347x500/qd%2BjHp.png" alt="The Final Handgun" class="static-image">
-                            <img src="https://media0.giphy.com/media/v1.Y2lkPTc5MGI3NjExYWt0eGM4aWkzcWVuNWUycDYydTJlemhhcjYwaHpoeDV2OHJkdG4yYSZlcD12MV9pbnRlcm5hbF9naWZfYnlfaWQmY3Q9Zw/6i3EiqXIIx5kUxpRR7/giphy.gif" alt="The Final Handgun Gameplay" class="gif-image">
-                        </div>
-                        
-                        <div class="project-meta">
-                            <span class="meta-tag">Unity 6</span>
-                            <span class="meta-tag">C#</span>
-                            <span class="meta-tag">48-Hour Game Jam</span>
-                            <span class="meta-tag">First Person Shooter</span>
-                        </div>
-                        
-                        <div class="project-description">
-                            A casino-themed first person shooter created for the UMD Spring 2025 Game Jam with the theme "gambling". Building on my previous game jam experiences, I focused on creating a more polished and refined gameplay experience with improved mechanics and visual effects.
-                        </div>
-                        
-                        <div class="project-highlights">
-                            <h3>Key Features & Accomplishments</h3>
-                            <ul>
-                                <li><strong>Advanced Animation System:</strong> Implemented proper enemy models with smooth animations for movement, attacks, and death sequences</li>
-                                <li><strong>Enhanced Combat Mechanics:</strong> Developed improved shooting mechanics with better collision detection and responsive hit feedback</li>
-                                <li><strong>Visual Effects:</strong> Created polished damage indicators and visual feedback systems for player and enemy interactions</li>
-                                <li><strong>First Unity 6 Project:</strong> Successfully migrated workflow to Unity 6, learning new features and optimizations</li>
-                            </ul>
-                        </div>
-                        
-                        <div class="project-highlights">
-                            <h3>What I Learned</h3>
-                            <p>This project taught me the importance of iteration and polish. By refining mechanics from my previous games, I learned how small improvements in collision detection and visual feedback can dramatically enhance player experience. Working solo under a 48-hour deadline also strengthened my time management and prioritization skills.</p>
-                        </div>
-                        
-                        <div class="project-buttons">
-                            <a href="https://b1tc3o.itch.io/the-final-handgun" target="_blank">Play Game on Itch.io</a>
-                            <a href="#projects" onclick="showPage('projects')" class="secondary">View All Projects →</a>
-                        </div>
-                    </div>
+<!-- HEADER -->
+<header class="header" id="header">
+  <div class="brand" onclick="navigate('home')" role="button" tabindex="0" aria-label="Home">
+    <div class="brand-name">Jaylen Williams</div>
+    <div class="brand-title">Game Designer</div>
+  </div>
+  <nav class="nav">
+    <a class="nav-link" href="#" data-page="projects" onclick="navigate('projects');return false">Projects</a>
+    <a class="nav-link" href="#" data-page="about" onclick="navigate('about');return false">About Me</a>
+    <a class="nav-link" href="#" data-page="resume" onclick="navigate('resume');return false">Resume</a>
+  </nav>
+</header>
 
-                    <!-- Slide 2: In Development -->
-                    <div class="slide">
-                        <span class="featured-badge">In Development</span>
-                        <h2>Upcoming Project</h2>
-                        <div class="placeholder-image">Coming Soon</div>
-                        
-                        <div class="project-description">
-                            I'm currently working on an exciting new project that explores different aspects of game design. This project will showcase my growth as a developer and push me into new creative territory. Stay tuned for updates as development progresses!
-                        </div>
-                        
-                        <div class="project-highlights">
-                            <h3>What to Expect</h3>
-                            <p>This upcoming project represents a new direction in my game development journey. I'm focusing on creating a more ambitious experience that will allow me to explore deeper gameplay systems, more complex mechanics, and enhanced storytelling. More details will be shared as the project takes shape.</p>
-                        </div>
-                        
-                        <div class="project-buttons">
-                            <a href="#projects" onclick="showPage('projects')" class="secondary">View All Projects →</a>
-                        </div>
-                    </div>
-                </div>
+<!-- FOOTER -->
+<footer class="footer" id="footer">
+  <a class="footer-link" href="https://itch.io/" target="_blank" rel="noopener" aria-label="Itch.io">
+    <svg viewBox="0 0 245.371 220.736" xmlns="http://www.w3.org/2000/svg"><path d="M31.99 1.365C21.287 7.72.2 31.945 0 38.298v10.516c0 12.456 10.489 24.296 21.855 24.296 13.163 0 24.096-11.136 24.096-24.296 0 13.16 9.928 24.296 23.091 24.296 13.163 0 23.101-11.136 23.101-24.296 0 13.16 10.933 24.296 24.096 24.296s24.096-11.136 24.096-24.296c0 13.16 9.938 24.296 23.101 24.296 13.163 0 23.091-11.136 23.091-24.296 0 13.16 10.933 24.296 24.096 24.296 11.366 0 21.855-11.84 21.855-24.296V38.298c-.2-6.354-21.287-30.58-31.99-36.933C191.227-.08 187.49 0 184.725 0h-124.08c-2.766 0-6.502-.08-16.654 1.365zm91.681 60.21c-2.063 3.704-6.162 6.263-11.06 6.838-4.899-.575-8.999-3.134-11.06-6.838-2.065 3.704-6.165 6.263-11.064 6.838-4.899-.575-8.999-3.134-11.06-6.838-2.064 3.704-6.161 6.263-11.06 6.838-5.344-.627-9.72-3.584-11.467-7.564-.487 8.447-1.96 14.752-4.58 22.504-2.758 8.166 1.207 14.465 4.12 16.725 10.284 7.97 24.263 5.17 35.327.476 3.857-1.636 7.241-2.943 10.744-2.943 3.504 0 6.888 1.307 10.745 2.943 11.064 4.694 25.043 7.494 35.327-.476 2.913-2.26 6.878-8.559 4.12-16.725-2.62-7.752-4.093-14.057-4.58-22.504-1.746 3.98-6.123 6.937-11.467 7.564-4.899-.575-8.997-3.134-11.06-6.838zm-23.18 59.312c-6.668 4.573-12.605 5.15-16.776 5.15-2.196 0-3.86-.198-5.106-.398-.4 1.468-.617 8.793-.617 14.297v44.956c0 16.87 7.04 31.96 17.283 34.329 2.7.625 5.503.672 8.397.093 10.533-2.115 17.924-17.16 17.924-34.422v-44.956c0-5.504-.217-12.83-.617-14.297-1.246.2-2.91.398-5.106.398-4.17 0-10.108-.577-15.382-5.15z"/></svg>
+  </a>
+  <a class="footer-link" href="https://linkedin.com/" target="_blank" rel="noopener" aria-label="LinkedIn">
+    <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433a2.062 2.062 0 01-2.063-2.065 2.064 2.064 0 112.063 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z"/></svg>
+  </a>
+</footer>
 
-                <div class="slideshow-indicators">
-                    <span class="indicator-dot active" onclick="goToSlide(0)"></span>
-                    <span class="indicator-dot" onclick="goToSlide(1)"></span>
-                </div>
+<!-- MAIN -->
+<main class="main">
+
+  <!-- HOME PAGE -->
+  <section class="page active" id="page-home">
+    <div class="container hero">
+      <div class="reveal">
+        <span class="section-label">Featured</span>
+        <h1 class="section-title">Latest Work</h1>
+      </div>
+
+      <div class="slideshow reveal" style="transition-delay:0.15s">
+        <div class="slideshow-track">
+          <!-- Slide 1: Most Recent -->
+          <div class="slide active" data-index="0">
+            <div class="slide-media" style="background:linear-gradient(135deg,#0a0020 0%,#1a0a4c 50%,#0d0059 100%);width:100%;height:100%"></div>
+            <div class="slide-overlay"></div>
+            <div class="slide-content">
+              <span class="slide-badge">Latest Release</span>
+              <h2 class="slide-title">Project Title</h2>
+              <p class="slide-role">Role: Solo Developer</p>
+              <p class="slide-desc">Description of your most recent completed project. Replace this with actual project details, engine used, and key highlights.</p>
             </div>
-
-            <h1>About Me</h1>
-            <div class="about-summary">
-                <p>I'm Jaylen Williams, a passionate game developer with a love for creating immersive experiences. Games have shaped my life since childhood, starting with Super Mario 64 DS, and now I'm pursuing my dream of creating my own games.</p>
-                
-                <p>I'm currently pursuing my Bachelor of Science in Information Science with a minor in Technology Innovation Leadership at the University of Maryland, College Park. I specialize in Unity and C# development, with growing experience in Unreal Engine 5. As an officer in the UMD Game Developers Club, I collaborate with fellow students to share knowledge and push creative boundaries.</p>
-                
-                <p>My areas of focus include game design, level design, combat design, and world building. I'm always seeking new challenges to grow as a developer and create memorable gaming experiences.</p>
-                
-                <a href="#about" onclick="showPage('about')" class="read-more-link">Read Full Story →</a>
+          </div>
+          <!-- Slide 2: In Development -->
+          <div class="slide" data-index="1">
+            <div class="slide-media" style="background:linear-gradient(135deg,#0a0014 0%,#1c0a3c 50%,#0d0040 100%);width:100%;height:100%"></div>
+            <div class="slide-overlay"></div>
+            <div class="slide-content">
+              <span class="slide-badge dev">In Development</span>
+              <h2 class="slide-title">Upcoming Project</h2>
+              <p class="slide-role">Role: Developer</p>
+              <p class="slide-desc">A preview of your current in-development project. Replace with details about what you're building and what to expect.</p>
             </div>
-        </section>
+          </div>
+        </div>
+        <div class="slideshow-arrows">
+          <button class="slide-arrow" onclick="changeSlide(-1)" aria-label="Previous">&#8592;</button>
+          <button class="slide-arrow" onclick="changeSlide(1)" aria-label="Next">&#8594;</button>
+        </div>
+        <div class="slideshow-nav">
+          <div class="slideshow-dot active" data-index="0" onclick="goToSlide(0)"></div>
+          <div class="slideshow-dot" data-index="1" onclick="goToSlide(1)"></div>
+        </div>
+      </div>
 
-        <section id="projects">
-            <h1>All Projects</h1>
-            
-            <div class="project">
-                <h2>The Final Handgun</h2>
-                <img src="https://img.itch.zone/aW1nLzIwOTkwOTA1LnBuZw==/347x500/qd%2BjHp.png" alt="The Final Handgun">
-                
-                <!-- Replace the src URL below with your actual gameplay video -->
-                <iframe class="project-video" src="about:blank" title="The Final Handgun Gameplay" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
-                <p style="text-align: center; font-size: 0.9em; color: rgba(255,255,255,0.6); margin-top: -10px;"><em>00</em></p>
-                
-                <div class="project-meta">
-                    <span class="meta-tag">Unity 6</span>
-                    <span class="meta-tag">C#</span>
-                    <span class="meta-tag">48-Hour Game Jam</span>
-                    <span class="meta-tag">Solo Developer</span>
-                </div>
-                
-                <div class="project-description">
-                    Created for the UMD Spring 2025 Game Jam with the theme "gambling". A casino-themed first person shooter that builds on concepts from previous game jams with a focus on polish and improved mechanics. This represents the culmination of my game jam series as I transition to exploring new genres and larger-scale projects.
-                </div>
-                
-                <div class="project-highlights">
-                    <h3>Technical Features</h3>
-                    <ul>
-                        <li>Proper enemy models with full animation systems (idle, attack, death)</li>
-                        <li>Improved collision detection and hit registration</li>
-                        <li>Enhanced shooting mechanics with responsive feedback</li>
-                        <li>Advanced visual effects for damage states and enemy reactions</li>
-                        <li>First project developed in Unity 6</li>
-                    </ul>
-                    
-                    <h3>What I Learned</h3>
-                    <p>Mastered the importance of iteration and polish in game development. Learned how refinement of core mechanics—particularly collision systems and visual feedback—can significantly enhance player satisfaction. Developed stronger time management skills working within strict 48-hour constraints.</p>
-                </div>
-                
-                <a href="https://b1tc3o.itch.io/the-final-handgun" target="_blank">Play on Itch.io</a>
-            </div>
+      <!-- Welcome Section -->
+      <div class="reveal" style="transition-delay:0.3s;margin-top:4rem">
+        <div class="welcome-section">
+          <span class="section-label">Welcome</span>
+          <h2 class="section-title">Hey, I'm Jaylen.</h2>
+          <p class="section-desc" style="margin-bottom:1.25rem">I'm a game designer and developer passionate about crafting immersive experiences that push creative and technical boundaries. From stealth-action adventures to arena shooters, I love building worlds that players want to get lost in.</p>
+          <p class="section-desc">Currently studying game development at the University of Maryland and always working on something new. Take a look around — check out my projects, learn more about my journey, or grab my resume. Let's make something great.</p>
+          <a class="cta-btn" href="#" onclick="navigate('projects');return false" style="margin-top:2rem">
+            View My Work
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" style="width:16px;height:16px"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>
+          </a>
+        </div>
+      </div>
 
-            <div class="project">
-                <h2>The Flooding Handgun</h2>
-                <img src="https://img.itch.zone/aW1nLzE4NDY2NDg2LmpwZw==/347x500/CD2QyH.jpg" alt="The Flooding Handgun">
-                
-                <!-- Replace the src URL below with your actual gameplay video -->
-                <iframe class="project-video" src="about:blank" title="The Flooding Handgun Gameplay" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
-                <p style="text-align: center; font-size: 0.9em; color: rgba(255,255,255,0.6); margin-top: -10px;"><em>https://media4.giphy.com/media/v1.Y2lkPTc5MGI3NjExcmN1NHAxb295MGo2YjNnc2RwMDl5NW5iMXExNTY3dHZqbTRwdjJ1eiZlcD12MV9pbnRlcm5hbF9naWZfYnlfaWQmY3Q9Zw/GZU53l5Ue3XqFqyF44/giphy.gif</em></p>
-                
-                <div class="project-meta">
-                    <span class="meta-tag">Unity</span>
-                    <span class="meta-tag">C#</span>
-                    <span class="meta-tag">24-Hour Game Jam</span>
-                    <span class="meta-tag">First Person Shooter</span>
-                </div>
-                
-                <div class="project-description">
-                    My second game jam entry for UMD Fall 2024 with the theme "Flooding". A sequel that pivots to the FPS genre, featuring a flooded environment where you play as a hand holding a handgun, surviving against enemy hordes. Includes a mini boss encounter and more complex enemy AI.
-                </div>
-                
-                <div class="project-highlights">
-                    <h3>Technical Features</h3>
-                    <ul>
-                        <li>First person shooter mechanics built from scratch</li>
-                        <li>Enemy AI with behavior patterns and wave spawning system</li>
-                        <li>Mini boss with unique attack patterns and health system</li>
-                        <li>Environmental design for flooded setting</li>
-                        <li>Player movement and camera controls optimized for FPS gameplay</li>
-                    </ul>
-                    
-                    <h3>What I Learned</h3>
-                    <p>Gained valuable experience transitioning between game genres. Learned to implement FPS mechanics including camera control, shooting systems, and enemy AI under extreme time pressure. This project proved I could successfully execute ideas outside my comfort zone.</p>
-                </div>
-                
-                <a href="https://b1tc3o.itch.io/the-flooding-handgun" target="_blank">Play on Itch.io</a>
-            </div>
-
-            <div class="project">
-                <h2>The Floating Handgun</h2>
-                <img src="https://img.itch.zone/aW1nLzE1NzY5ODQ5LnBuZw==/347x500/7XdSBA.png" alt="The Floating Handgun">
-                
-                <!-- Replace the src URL below with your actual gameplay video -->
-                <iframe class="project-video" src="about:blank" title="The Floating Handgun Gameplay" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
-                <p style="text-align: center; font-size: 0.9em; color: rgba(255,255,255,0.6); margin-top: -10px;"><em>Replace with gameplay video URL</em></p>
-                
-                <div class="project-meta">
-                    <span class="meta-tag">Unity</span>
-                    <span class="meta-tag">C#</span>
-                    <span class="meta-tag">24-Hour Game Jam</span>
-                    <span class="meta-tag">Top-Down Shooter</span>
-                </div>
-                
-                <div class="project-description">
-                    My first game jam experience for UMD Spring 2024 with themes "Medieval Fantasy" and "Modern Weapons". An arcade-style top-down shooter where you play as a severed hand wielding a modern handgun in a medieval setting. Fast-paced action focused on defeating enemies and scoring points.
-                </div>
-                
-                <div class="project-highlights">
-                    <h3>Technical Features</h3>
-                    <ul>
-                        <li>Top-down shooter mechanics with 360-degree aiming</li>
-                        <li>Point-based scoring system</li>
-                        <li>Enemy spawning and basic AI behavior</li>
-                        <li>Player health and damage systems</li>
-                        <li>Medieval-themed environment with modern weapon contrast</li>
-                    </ul>
-                    
-                    <h3>What I Learned</h3>
-                    <p>My introduction to rapid game development and working under pressure. Learned essential game jam skills: scope management, prioritizing core gameplay, and delivering a complete experience in 24 hours. This project gave me confidence to tackle more ambitious game jam projects in the future.</p>
-                </div>
-                
-                <a href="https://b1tc3o.itch.io/the-floating-handgun" target="_blank">Play on Itch.io</a>
-            </div>
-
-            <div class="project">
-                <span class="upcoming-badge">🚀 Coming Soon</span>
-                <h2>Untitled Project - In Development</h2>
-                <div class="placeholder-image">Gameplay Preview Coming Soon</div>
-                
-                <!-- Placeholder for future gameplay video -->
-                <div class="project-video" style="background: linear-gradient(135deg, rgba(30, 58, 138, 0.3), rgba(59, 130, 246, 0.3)); display: flex; align-items: center; justify-content: center; color: rgba(255, 255, 255, 0.5); font-size: 1.2em;">
-                </div>
-                
-                <div class="project-meta">
-                    <span class="meta-tag">In Development</span>
-                    <span class="meta-tag">TBA</span>
-                </div>
-                
-                <div class="project-description">
-                    Currently in active development, this project represents my next step in game development. I'm exploring new gameplay mechanics and pushing myself to create a more ambitious experience. This project will showcase my growth as a developer and my ability to tackle larger-scale design challenges.
-                </div>
-                
-                <div class="project-highlights">
-                    <h3>Development Goals</h3>
-                    <ul>
-                        <li>Implement more complex gameplay systems</li>
-                        <li>Create deeper player progression mechanics</li>
-                        <li>Develop enhanced narrative elements</li>
-                        <li>Polish visual and audio presentation</li>
-                        <li>Explore new tools and technologies</li>
-                    </ul>
-                    
-                    <h3>What I'm Learning</h3>
-                    <p>This project is teaching me about long-term development planning, iterative design processes, and managing scope for larger projects. Stay tuned for updates as development progresses!</p>
-                </div>
-            </div>
-        </section>
-
-        <section id="about">
-            <h1>About Me</h1>
-            <h2>My Journey into Game Development</h2>
-            
-            <div class="about-grid">
-                <div class="about-section">
-                    <h3>The Beginning</h3>
-                    <p>
-                        Games have been a part of my life since I was a child, and I have always dreamed of creating my own games. The first game I ever played was Super Mario 64 DS, and it sparked my love for gaming. I remember spending hours exploring the Mushroom Kingdom, jumping, and stomping goombas. I loved the sense of adventure and discovery that the game offered. I was fascinated by how the game was made and how it created such an immersive experience.
-                    </p>
-                    <p>As I grew up, I started to explore more games and genres. I played everything from platformers to RPGs, and I was always amazed by the creativity and innovation in game design. I remember playing games like Red Dead Redemption and The Legend of Zelda: Breath of the Wild, which had rich worlds and incredibly fun gameplay. I was particularly drawn to the storytelling and world-building aspects of these games. These games influenced my passion for game design and development, and I knew I wanted to create my own games one day.</p>
-                </div>
-                
-                <div class="about-section">
-                    <h3>My Development Journey</h3>
-                    <p>
-                        I began my development journey in 2019 watching tutorials and building small demos with Unity. I would use basic blocks to play around and prototype. My first actual experience with projects was in my Intro to Interactive Media class where I had to build a few projects using Scratch. I currently have experience in Unity and C#, and I recently started exploring Unreal Engine 5. I'm also an officer in the UMD Game Developers Club, where I collaborate with other students to share knowledge. I am always looking to learn new things and improve my skills in game development.
-                    </p>
-                    <p>I am currently pursuing my Bachelor of Science in Information Science with a minor in Technology Innovation Leadership from the University of Maryland, College Park. This has given me a solid foundation in technology and problem-solving. I also gained an analytical mindset through my coursework, which I apply to my game development projects.</p>
-                    <p>I have a strong interest in game design, level design, combat design, and world building. I am always looking for new challenges and opportunities to grow as a game developer. I am currently working on more projects that showcase my skills and creativity in game design and development.</p>
-                </div>
-                
-                <div class="about-section full-width">
-                    <h3>Beyond Development</h3>
-                    <p>
-                        In my free time, I enjoy playing games, reading and watching videos about game design, and exploring new technologies. I'm passionate about understanding what makes games engaging and memorable, which drives me to constantly learn and experiment with new ideas.
-                    </p>
-                    
-                    <p>
-                        Beyond gaming, I'm an avid reader with interests spanning multiple genres. Reading helps me understand narrative structure, character development, and world-building techniques that I apply to my game design work. I also enjoy staying active, exploring creative hobbies, and spending time with friends and family.
-                    </p>
-                    
-                    <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 2em; margin-top: 1.5em;">
-                        <div>
-                            <p><strong>My Favorite Games:</strong></p>
-                            <ul>
-                                <li>The Legend of Zelda: Breath of the Wild</li>
-                                <li>Red Dead Redemption 2</li>
-                                <li>Cyberpunk 2077</li>
-                                <li>Grand Theft Auto V</li>
-                                <li>Super Mario Odyssey</li>
-                                <li>Katana Zero</li>
-                                <li>I Am Your Beast</li>
-                            </ul>
-                        </div>
-                        
-                        <div>
-                            <p><strong>My Favorite Books:</strong></p>
-                            <ul>
-                                <li><em>Add your favorite books here</em></li>
-                                <li><em>Example: The Name of the Wind</em></li>
-                                <li><em>Example: Ready Player One</em></li>
-                                <li><em>Example: Ender's Game</em></li>
-                                <li><em>Example: The Martian</em></li>
-                            </ul>
-                        </div>
-                    </div>
-                    
-                    <p style="margin-top: 1.5em;">Feel free to explore my projects and resume to see what I've been working on!</p>
-                </div>
-            </div>
-            
-            <h3>Thank you for visiting my portfolio!</h3>
-        </section>
-
-        <section id="resume">
-            <h1>Resume</h1>
-            <a href="JaylenWRESUME.pdf" download class="resume-link">Download Resume (PDF)</a>
-            
-            <div class="resume-section">
-                <h2>Education</h2>
-                <p><strong>University of Maryland, College Park</strong></p>
-                <p>Bachelor of Science in Information Science<br>
-                Minor in Technology Innovation Leadership<br>
-                Expected Graduation: June 2026</p>
-                <p>Coursework focused on data analysis, systems thinking, and user-centered design.<br>
-                Member of the Game Developers Club, XR Club, and Code: Black.</p>
-            </div>
-
-            <div class="resume-section">
-                <h2>Experience</h2>
-                <p><strong>Junior Design Specialist & Trainee</strong></p>
-                <p>• Led a cross-functional team to create a community-centered design proposal<br>
-                • Refined design and prototyping skills through hands-on project work<br>
-                • Analyzed complex challenges and brainstormed creative solutions<br>
-                • Recognized with multiple awards for leadership and teamwork</p>
-            </div>
-
-            <div class="resume-section">
-                <h2>Skills</h2>
-                <p><strong>Game Development:</strong> Unity, Unreal Engine 5, C#, Python<br>
-                <strong>Design:</strong> Game Design, Level Design, Combat Design, Visual Scripting<br>
-                <strong>Other:</strong> Prototyping, Game Balancing, Version Control, Agile Development</p>
-            </div>
-        </section>
     </div>
+  </section>
 
-    <footer>
-        <a href="https://b1tc3o.itch.io/" target="_blank">
-            <img src="https://static.itch.io/images/itchio-textless-white.svg" alt="Itch.io">
+  <!-- PROJECTS PAGE -->
+  <section class="page" id="page-projects">
+    <div class="container projects-page">
+      <div class="reveal">
+        <span class="section-label">Portfolio</span>
+        <h1 class="section-title">All Projects</h1>
+        <p class="section-desc">A collection of games I've designed and developed — from game jams to personal passion projects.</p>
+      </div>
+
+      <div class="projects-grid" style="margin-top:2rem">
+
+        <div class="project-card reveal" style="transition-delay:0.1s">
+          <div class="card-media">
+            <img src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='800' height='450' fill='%230a0a20'%3E%3Crect width='800' height='450' fill='%230a0a20'/%3E%3Ctext x='400' y='225' text-anchor='middle' fill='%231a1a44' font-size='28' font-family='sans-serif'%3EProject 1 Image%3C/text%3E%3C/svg%3E" alt="Project 1">
+            <div class="card-gif" style="background:linear-gradient(135deg,#0d0030,#1a0a5c);display:flex;align-items:center;justify-content:center;color:var(--text-muted);font-size:0.85rem;font-family:var(--font-body)">Gameplay GIF / Video</div>
+            <div class="card-play-icon"></div>
+          </div>
+          <div class="card-info">
+            <h3 class="card-title">Project One</h3>
+            <p class="card-role">Solo Developer</p>
+            <p class="card-desc">Placeholder description for your first project. Replace with actual project details.</p>
+            <div class="card-tags">
+              <span class="card-tag">Unity</span>
+              <span class="card-tag">C#</span>
+              <span class="card-tag">Game Jam</span>
+            </div>
+            <a class="itch-link" href="https://itch.io/" target="_blank" rel="noopener">
+              <svg viewBox="0 0 245.371 220.736" xmlns="http://www.w3.org/2000/svg"><path d="M31.99 1.365C21.287 7.72.2 31.945 0 38.298v10.516c0 12.456 10.489 24.296 21.855 24.296 13.163 0 24.096-11.136 24.096-24.296 0 13.16 9.928 24.296 23.091 24.296 13.163 0 23.101-11.136 23.101-24.296 0 13.16 10.933 24.296 24.096 24.296s24.096-11.136 24.096-24.296c0 13.16 9.938 24.296 23.101 24.296 13.163 0 23.091-11.136 23.091-24.296 0 13.16 10.933 24.296 24.096 24.296 11.366 0 21.855-11.84 21.855-24.296V38.298c-.2-6.354-21.287-30.58-31.99-36.933C191.227-.08 187.49 0 184.725 0h-124.08c-2.766 0-6.502-.08-16.654 1.365zm91.681 60.21c-2.063 3.704-6.162 6.263-11.06 6.838-4.899-.575-8.999-3.134-11.06-6.838-2.065 3.704-6.165 6.263-11.064 6.838-4.899-.575-8.999-3.134-11.06-6.838-2.064 3.704-6.161 6.263-11.06 6.838-5.344-.627-9.72-3.584-11.467-7.564-.487 8.447-1.96 14.752-4.58 22.504-2.758 8.166 1.207 14.465 4.12 16.725 10.284 7.97 24.263 5.17 35.327.476 3.857-1.636 7.241-2.943 10.744-2.943 3.504 0 6.888 1.307 10.745 2.943 11.064 4.694 25.043 7.494 35.327-.476 2.913-2.26 6.878-8.559 4.12-16.725-2.62-7.752-4.093-14.057-4.58-22.504-1.746 3.98-6.123 6.937-11.467 7.564-4.899-.575-8.997-3.134-11.06-6.838zm-23.18 59.312c-6.668 4.573-12.605 5.15-16.776 5.15-2.196 0-3.86-.198-5.106-.398-.4 1.468-.617 8.793-.617 14.297v44.956c0 16.87 7.04 31.96 17.283 34.329 2.7.625 5.503.672 8.397.093 10.533-2.115 17.924-17.16 17.924-34.422v-44.956c0-5.504-.217-12.83-.617-14.297-1.246.2-2.91.398-5.106.398-4.17 0-10.108-.577-15.382-5.15z"/></svg>
+              Play on itch.io
+            </a>
+          </div>
+        </div>
+
+        <div class="project-card reveal" style="transition-delay:0.2s">
+          <div class="card-media">
+            <img src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='800' height='450' fill='%230a0a20'%3E%3Crect width='800' height='450' fill='%230a0a20'/%3E%3Ctext x='400' y='225' text-anchor='middle' fill='%231a1a44' font-size='28' font-family='sans-serif'%3EProject 2 Image%3C/text%3E%3C/svg%3E" alt="Project 2">
+            <div class="card-gif" style="background:linear-gradient(135deg,#100030,#200a5c);display:flex;align-items:center;justify-content:center;color:var(--text-muted);font-size:0.85rem;font-family:var(--font-body)">Gameplay GIF / Video</div>
+            <div class="card-play-icon"></div>
+          </div>
+          <div class="card-info">
+            <h3 class="card-title">Project Two</h3>
+            <p class="card-role">Solo Developer</p>
+            <p class="card-desc">Placeholder description for your second project. Replace with actual project details.</p>
+            <div class="card-tags">
+              <span class="card-tag">Unity</span>
+              <span class="card-tag">C#</span>
+              <span class="card-tag">Game Jam</span>
+            </div>
+            <a class="itch-link" href="https://itch.io/" target="_blank" rel="noopener">
+              <svg viewBox="0 0 245.371 220.736" xmlns="http://www.w3.org/2000/svg"><path d="M31.99 1.365C21.287 7.72.2 31.945 0 38.298v10.516c0 12.456 10.489 24.296 21.855 24.296 13.163 0 24.096-11.136 24.096-24.296 0 13.16 9.928 24.296 23.091 24.296 13.163 0 23.101-11.136 23.101-24.296 0 13.16 10.933 24.296 24.096 24.296s24.096-11.136 24.096-24.296c0 13.16 9.938 24.296 23.101 24.296 13.163 0 23.091-11.136 23.091-24.296 0 13.16 10.933 24.296 24.096 24.296 11.366 0 21.855-11.84 21.855-24.296V38.298c-.2-6.354-21.287-30.58-31.99-36.933C191.227-.08 187.49 0 184.725 0h-124.08c-2.766 0-6.502-.08-16.654 1.365zm91.681 60.21c-2.063 3.704-6.162 6.263-11.06 6.838-4.899-.575-8.999-3.134-11.06-6.838-2.065 3.704-6.165 6.263-11.064 6.838-4.899-.575-8.999-3.134-11.06-6.838-2.064 3.704-6.161 6.263-11.06 6.838-5.344-.627-9.72-3.584-11.467-7.564-.487 8.447-1.96 14.752-4.58 22.504-2.758 8.166 1.207 14.465 4.12 16.725 10.284 7.97 24.263 5.17 35.327.476 3.857-1.636 7.241-2.943 10.744-2.943 3.504 0 6.888 1.307 10.745 2.943 11.064 4.694 25.043 7.494 35.327-.476 2.913-2.26 6.878-8.559 4.12-16.725-2.62-7.752-4.093-14.057-4.58-22.504-1.746 3.98-6.123 6.937-11.467 7.564-4.899-.575-8.997-3.134-11.06-6.838zm-23.18 59.312c-6.668 4.573-12.605 5.15-16.776 5.15-2.196 0-3.86-.198-5.106-.398-.4 1.468-.617 8.793-.617 14.297v44.956c0 16.87 7.04 31.96 17.283 34.329 2.7.625 5.503.672 8.397.093 10.533-2.115 17.924-17.16 17.924-34.422v-44.956c0-5.504-.217-12.83-.617-14.297-1.246.2-2.91.398-5.106.398-4.17 0-10.108-.577-15.382-5.15z"/></svg>
+              Play on itch.io
+            </a>
+          </div>
+        </div>
+
+        <div class="project-card reveal" style="transition-delay:0.3s">
+          <div class="card-media">
+            <img src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='800' height='450' fill='%230a0a20'%3E%3Crect width='800' height='450' fill='%230a0a20'/%3E%3Ctext x='400' y='225' text-anchor='middle' fill='%231a1a44' font-size='28' font-family='sans-serif'%3EProject 3 Image%3C/text%3E%3C/svg%3E" alt="Project 3">
+            <div class="card-gif" style="background:linear-gradient(135deg,#0d0028,#180a50);display:flex;align-items:center;justify-content:center;color:var(--text-muted);font-size:0.85rem;font-family:var(--font-body)">Gameplay GIF / Video</div>
+            <div class="card-play-icon"></div>
+          </div>
+          <div class="card-info">
+            <h3 class="card-title">Project Three</h3>
+            <p class="card-role">Developer</p>
+            <p class="card-desc">Placeholder description for your third project. Replace with actual project details.</p>
+            <div class="card-tags">
+              <span class="card-tag">Unity</span>
+              <span class="card-tag">C#</span>
+            </div>
+            <a class="itch-link" href="https://itch.io/" target="_blank" rel="noopener">
+              <svg viewBox="0 0 245.371 220.736" xmlns="http://www.w3.org/2000/svg"><path d="M31.99 1.365C21.287 7.72.2 31.945 0 38.298v10.516c0 12.456 10.489 24.296 21.855 24.296 13.163 0 24.096-11.136 24.096-24.296 0 13.16 9.928 24.296 23.091 24.296 13.163 0 23.101-11.136 23.101-24.296 0 13.16 10.933 24.296 24.096 24.296s24.096-11.136 24.096-24.296c0 13.16 9.938 24.296 23.101 24.296 13.163 0 23.091-11.136 23.091-24.296 0 13.16 10.933 24.296 24.096 24.296 11.366 0 21.855-11.84 21.855-24.296V38.298c-.2-6.354-21.287-30.58-31.99-36.933C191.227-.08 187.49 0 184.725 0h-124.08c-2.766 0-6.502-.08-16.654 1.365zm91.681 60.21c-2.063 3.704-6.162 6.263-11.06 6.838-4.899-.575-8.999-3.134-11.06-6.838-2.065 3.704-6.165 6.263-11.064 6.838-4.899-.575-8.999-3.134-11.06-6.838-2.064 3.704-6.161 6.263-11.06 6.838-5.344-.627-9.72-3.584-11.467-7.564-.487 8.447-1.96 14.752-4.58 22.504-2.758 8.166 1.207 14.465 4.12 16.725 10.284 7.97 24.263 5.17 35.327.476 3.857-1.636 7.241-2.943 10.744-2.943 3.504 0 6.888 1.307 10.745 2.943 11.064 4.694 25.043 7.494 35.327-.476 2.913-2.26 6.878-8.559 4.12-16.725-2.62-7.752-4.093-14.057-4.58-22.504-1.746 3.98-6.123 6.937-11.467 7.564-4.899-.575-8.997-3.134-11.06-6.838zm-23.18 59.312c-6.668 4.573-12.605 5.15-16.776 5.15-2.196 0-3.86-.198-5.106-.398-.4 1.468-.617 8.793-.617 14.297v44.956c0 16.87 7.04 31.96 17.283 34.329 2.7.625 5.503.672 8.397.093 10.533-2.115 17.924-17.16 17.924-34.422v-44.956c0-5.504-.217-12.83-.617-14.297-1.246.2-2.91.398-5.106.398-4.17 0-10.108-.577-15.382-5.15z"/></svg>
+              Play on itch.io
+            </a>
+          </div>
+        </div>
+
+        <div class="project-card reveal" style="transition-delay:0.4s">
+          <div class="card-media">
+            <img src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='800' height='450' fill='%230a0a20'%3E%3Crect width='800' height='450' fill='%230a0a20'/%3E%3Ctext x='400' y='225' text-anchor='middle' fill='%231a1a44' font-size='28' font-family='sans-serif'%3EProject 4 Image%3C/text%3E%3C/svg%3E" alt="Project 4">
+            <div class="card-gif" style="background:linear-gradient(135deg,#0a0020,#160848);display:flex;align-items:center;justify-content:center;color:var(--text-muted);font-size:0.85rem;font-family:var(--font-body)">Gameplay GIF / Video</div>
+            <div class="card-play-icon"></div>
+          </div>
+          <div class="card-info">
+            <h3 class="card-title">Project Four</h3>
+            <p class="card-role">Developer</p>
+            <p class="card-desc">Placeholder description for your fourth project. Replace with actual project details.</p>
+            <div class="card-tags">
+              <span class="card-tag">Unity</span>
+              <span class="card-tag">C#</span>
+            </div>
+            <a class="itch-link" href="https://itch.io/" target="_blank" rel="noopener">
+              <svg viewBox="0 0 245.371 220.736" xmlns="http://www.w3.org/2000/svg"><path d="M31.99 1.365C21.287 7.72.2 31.945 0 38.298v10.516c0 12.456 10.489 24.296 21.855 24.296 13.163 0 24.096-11.136 24.096-24.296 0 13.16 9.928 24.296 23.091 24.296 13.163 0 23.101-11.136 23.101-24.296 0 13.16 10.933 24.296 24.096 24.296s24.096-11.136 24.096-24.296c0 13.16 9.938 24.296 23.101 24.296 13.163 0 23.091-11.136 23.091-24.296 0 13.16 10.933 24.296 24.096 24.296 11.366 0 21.855-11.84 21.855-24.296V38.298c-.2-6.354-21.287-30.58-31.99-36.933C191.227-.08 187.49 0 184.725 0h-124.08c-2.766 0-6.502-.08-16.654 1.365zm91.681 60.21c-2.063 3.704-6.162 6.263-11.06 6.838-4.899-.575-8.999-3.134-11.06-6.838-2.065 3.704-6.165 6.263-11.064 6.838-4.899-.575-8.999-3.134-11.06-6.838-2.064 3.704-6.161 6.263-11.06 6.838-5.344-.627-9.72-3.584-11.467-7.564-.487 8.447-1.96 14.752-4.58 22.504-2.758 8.166 1.207 14.465 4.12 16.725 10.284 7.97 24.263 5.17 35.327.476 3.857-1.636 7.241-2.943 10.744-2.943 3.504 0 6.888 1.307 10.745 2.943 11.064 4.694 25.043 7.494 35.327-.476 2.913-2.26 6.878-8.559 4.12-16.725-2.62-7.752-4.093-14.057-4.58-22.504-1.746 3.98-6.123 6.937-11.467 7.564-4.899-.575-8.997-3.134-11.06-6.838zm-23.18 59.312c-6.668 4.573-12.605 5.15-16.776 5.15-2.196 0-3.86-.198-5.106-.398-.4 1.468-.617 8.793-.617 14.297v44.956c0 16.87 7.04 31.96 17.283 34.329 2.7.625 5.503.672 8.397.093 10.533-2.115 17.924-17.16 17.924-34.422v-44.956c0-5.504-.217-12.83-.617-14.297-1.246.2-2.91.398-5.106.398-4.17 0-10.108-.577-15.382-5.15z"/></svg>
+              Play on itch.io
+            </a>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- ABOUT PAGE -->
+  <section class="page" id="page-about">
+    <div class="container about-page">
+      <div class="reveal">
+        <span class="section-label">Get to Know Me</span>
+        <h1 class="section-title">About Me</h1>
+      </div>
+
+      <div class="about-section reveal" style="transition-delay:0.1s">
+        <h2 class="about-section-title">Origins</h2>
+        <p class="about-text">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Growing up, games were more than entertainment — they were worlds to explore, stories to live, and systems to understand. That curiosity about how games work became the foundation for everything that followed.</p>
+      </div>
+
+      <div class="about-section reveal" style="transition-delay:0.2s">
+        <h2 class="about-section-title">The Journey</h2>
+        <p class="about-text">Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum. From early prototypes to polished game jam entries, every project has been a lesson in design, code, and collaboration. The path continues with bigger ambitions and bolder ideas.</p>
+      </div>
+
+      <div class="about-section reveal" style="transition-delay:0.3s">
+        <h2 class="about-section-title">Beyond Games</h2>
+        <p class="about-text" style="margin-bottom:1.5rem">When I'm not designing or developing games, I'm consuming them — along with movies, books, and shows that fuel my creativity and broaden my perspective on storytelling and world-building.</p>
+
+        <h3 style="font-family:var(--font-display);font-size:1.15rem;font-weight:700;color:var(--blue-light);margin-bottom:1.25rem">My Top 5s</h3>
+
+        <div class="top5-grid">
+          <div class="top5-card">
+            <div class="top5-category">🎮 Games</div>
+            <ol class="top5-list">
+              <li>Placeholder Game Title</li>
+              <li>Placeholder Game Title</li>
+              <li>Placeholder Game Title</li>
+              <li>Placeholder Game Title</li>
+              <li>Placeholder Game Title</li>
+            </ol>
+          </div>
+          <div class="top5-card">
+            <div class="top5-category">🎬 Movies</div>
+            <ol class="top5-list">
+              <li>Placeholder Movie Title</li>
+              <li>Placeholder Movie Title</li>
+              <li>Placeholder Movie Title</li>
+              <li>Placeholder Movie Title</li>
+              <li>Placeholder Movie Title</li>
+            </ol>
+          </div>
+          <div class="top5-card">
+            <div class="top5-category">📚 Books</div>
+            <ol class="top5-list">
+              <li>Placeholder Book Title</li>
+              <li>Placeholder Book Title</li>
+              <li>Placeholder Book Title</li>
+              <li>Placeholder Book Title</li>
+              <li>Placeholder Book Title</li>
+            </ol>
+          </div>
+          <div class="top5-card">
+            <div class="top5-category">📺 Shows</div>
+            <ol class="top5-list">
+              <li>Placeholder Show Title</li>
+              <li>Placeholder Show Title</li>
+              <li>Placeholder Show Title</li>
+              <li>Placeholder Show Title</li>
+              <li>Placeholder Show Title</li>
+            </ol>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- RESUME PAGE -->
+  <section class="page" id="page-resume">
+    <div class="container resume-page">
+      <div class="reveal">
+        <span class="section-label">Background</span>
+        <h1 class="section-title">Resume</h1>
+      </div>
+
+      <div class="resume-section reveal" style="transition-delay:0.1s">
+        <h2 class="resume-section-title"><span class="icon">🎓</span> Education</h2>
+        <div class="edu-item">
+          <div class="edu-school">University of Maryland</div>
+          <div class="edu-degree">B.S. in Computer Science — Game Development Track</div>
+          <div class="edu-date">Expected Graduation: 2026</div>
+        </div>
+      </div>
+
+      <div class="resume-section reveal" style="transition-delay:0.2s">
+        <h2 class="resume-section-title"><span class="icon">⚡</span> Skills</h2>
+        <div class="skills-grid">
+          <div class="skill-group">
+            <div class="skill-group-title">Engines</div>
+            <div class="skill-item">Unity</div>
+            <div class="skill-item">Unreal Engine 5</div>
+            <div class="skill-item">Godot</div>
+          </div>
+          <div class="skill-group">
+            <div class="skill-group-title">Languages</div>
+            <div class="skill-item">C#</div>
+            <div class="skill-item">C++</div>
+            <div class="skill-item">JavaScript</div>
+            <div class="skill-item">Python</div>
+          </div>
+          <div class="skill-group">
+            <div class="skill-group-title">Design</div>
+            <div class="skill-item">Game Design</div>
+            <div class="skill-item">Level Design</div>
+            <div class="skill-item">Narrative Design</div>
+            <div class="skill-item">UI/UX</div>
+          </div>
+          <div class="skill-group">
+            <div class="skill-group-title">Tools</div>
+            <div class="skill-item">Git / GitHub</div>
+            <div class="skill-item">Blender</div>
+            <div class="skill-item">Photoshop</div>
+          </div>
+          <div class="skill-group">
+            <div class="skill-group-title">Soft Skills</div>
+            <div class="skill-item">Team Leadership</div>
+            <div class="skill-item">Agile / Scrum</div>
+            <div class="skill-item">Playtesting</div>
+          </div>
+        </div>
+      </div>
+
+      <div class="resume-section reveal" style="transition-delay:0.3s">
+        <h2 class="resume-section-title"><span class="icon">📄</span> Download</h2>
+        <p style="color:var(--text-secondary);margin-bottom:0.5rem">Get a copy of my full resume.</p>
+        <a class="download-btn" href="#" download="Jaylen_Williams_Resume.pdf">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>
+          Download PDF
         </a>
-        <a href="https://www.linkedin.com/in/jaylenwilliams1/" target="_blank">
-            <img src="InBug-White.png" alt="LinkedIn">
-        </a>
-    </footer>
+      </div>
+    </div>
+  </section>
 
-    <script>
-        let currentSlide = 0;
+</main>
 
-        function showPage(pageId, addToHistory = true) {
-            document.querySelectorAll('section').forEach(section => {
-                section.classList.remove('active');
-            });
-            
-            const targetSection = document.getElementById(pageId);
-            if (targetSection) {
-                targetSection.classList.add('active');
-            }
-            
-            // Update browser history
-            if (addToHistory) {
-                const url = pageId === 'home' ? '/' : `#${pageId}`;
-                history.pushState({ page: pageId }, '', url);
-            }
-            
-            window.scrollTo({top: 0, behavior: 'smooth'});
-        }
+<script>
+// ═══════════════ NAVIGATION & HISTORY API ═══════════════
+const pages = {home:'page-home',projects:'page-projects',about:'page-about',resume:'page-resume'};
+let currentPage = 'home';
 
-        // Handle browser back/forward buttons
-        window.addEventListener('popstate', (event) => {
-            if (event.state && event.state.page) {
-                showPage(event.state.page, false);
-            } else {
-                // Default to home if no state
-                const hash = window.location.hash.substring(1);
-                showPage(hash || 'home', false);
-            }
-        });
+function navigate(page, pushState=true){
+  if(!pages[page]) page = 'home';
+  document.querySelectorAll('.page').forEach(p=>p.classList.remove('active'));
+  document.getElementById(pages[page]).classList.add('active');
+  document.querySelectorAll('.nav-link').forEach(l=>{
+    l.classList.toggle('active', l.dataset.page===page);
+  });
+  currentPage = page;
+  window.scrollTo({top:0,behavior:'smooth'});
+  if(pushState) history.pushState({page},'',page==='home'?'/':'#'+page);
+  // Re-trigger scroll reveals
+  setTimeout(initReveals,100);
+}
 
-        function changeSlide(direction) {
-            const slides = document.querySelectorAll('.slide');
-            const indicators = document.querySelectorAll('.indicator-dot');
-            
-            slides[currentSlide].classList.remove('active-slide');
-            indicators[currentSlide].classList.remove('active');
-            
-            currentSlide = (currentSlide + direction + slides.length) % slides.length;
-            
-            slides[currentSlide].classList.add('active-slide');
-            indicators[currentSlide].classList.add('active');
-        }
+window.addEventListener('popstate',(e)=>{
+  const page = e.state?.page || 'home';
+  navigate(page, false);
+});
 
-        function goToSlide(index) {
-            const slides = document.querySelectorAll('.slide');
-            const indicators = document.querySelectorAll('.indicator-dot');
-            
-            slides[currentSlide].classList.remove('active-slide');
-            indicators[currentSlide].classList.remove('active');
-            
-            currentSlide = index;
-            
-            slides[currentSlide].classList.add('active-slide');
-            indicators[currentSlide].classList.add('active');
-        }
+// ═══════════════ SLIDESHOW ═══════════════
+let currentSlide = 0;
+const slides = document.querySelectorAll('.slide');
+const dots = document.querySelectorAll('.slideshow-dot');
 
-        let lastScrollTop = 0;
-        let scrollTimeout;
-        const header = document.querySelector('header');
-        const footer = document.querySelector('footer');
+function goToSlide(index){
+  slides.forEach(s=>s.classList.remove('active'));
+  dots.forEach(d=>d.classList.remove('active'));
+  slides[index].classList.add('active');
+  dots[index].classList.add('active');
+  currentSlide = index;
+}
+function changeSlide(dir){
+  let next = (currentSlide+dir+slides.length)%slides.length;
+  goToSlide(next);
+}
+// Auto-advance
+let slideInterval = setInterval(()=>changeSlide(1),6000);
+document.querySelector('.slideshow')?.addEventListener('mouseenter',()=>clearInterval(slideInterval));
+document.querySelector('.slideshow')?.addEventListener('mouseleave',()=>{slideInterval=setInterval(()=>changeSlide(1),6000)});
 
-        window.addEventListener('scroll', () => {
-            const st = window.pageYOffset || document.documentElement.scrollTop;
-            
-            if (st > lastScrollTop && st > 100) {
-                header.style.top = '-200px';
-            } else {
-                header.style.top = '0';
-            }
-            
-            lastScrollTop = st <= 0 ? 0 : st;
-            
-            footer.style.bottom = '-100px';
-            
-            clearTimeout(scrollTimeout);
-            scrollTimeout = setTimeout(() => {
-                footer.style.bottom = '0';
-            }, 200);
-        });
+// ═══════════════ HEADER/FOOTER SCROLL BEHAVIOR ═══════════════
+let lastScroll = 0;
+let scrollTimer = null;
+const header = document.getElementById('header');
+const footer = document.getElementById('footer');
 
-        document.addEventListener('DOMContentLoaded', () => {
-            // Check for hash in URL on load
-            const hash = window.location.hash.substring(1);
-            const initialPage = hash || 'home';
-            showPage(initialPage, false);
-            
-            // Set initial state
-            history.replaceState({ page: initialPage }, '', window.location.href);
-        });
-    </script>
+window.addEventListener('scroll',()=>{
+  const st = window.pageYOffset;
+  // Header: show only at top
+  if(st > 80){
+    header.classList.add('hidden');
+  } else {
+    header.classList.remove('hidden');
+  }
+  // Footer: hide while scrolling
+  footer.classList.add('hidden');
+  clearTimeout(scrollTimer);
+  scrollTimer = setTimeout(()=>{
+    footer.classList.remove('hidden');
+  }, 300);
+
+  lastScroll = st;
+},{passive:true});
+
+// ═══════════════ SCROLL REVEAL ═══════════════
+function initReveals(){
+  const reveals = document.querySelectorAll('.reveal:not(.visible)');
+  const observer = new IntersectionObserver((entries)=>{
+    entries.forEach(e=>{
+      if(e.isIntersecting){e.target.classList.add('visible');observer.unobserve(e.target)}
+    });
+  },{threshold:0.1,rootMargin:'0px 0px -40px 0px'});
+  reveals.forEach(r=>observer.observe(r));
+}
+
+// ═══════════════ INIT ═══════════════
+window.addEventListener('DOMContentLoaded',()=>{
+  // Handle direct hash navigation
+  const hash = window.location.hash.replace('#','');
+  if(hash && pages[hash]) navigate(hash, false);
+
+  // Loader
+  setTimeout(()=>{
+    document.getElementById('loader').classList.add('done');
+    setTimeout(()=>document.getElementById('loader').style.display='none',600);
+  },800);
+
+  initReveals();
+});
+</script>
 </body>
 </html>
