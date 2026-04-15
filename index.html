@@ -56,7 +56,7 @@ body::before{
 .header.hidden{transform:translateY(-100%);opacity:0}
 
 .brand{cursor:pointer;position:relative;padding:0.4rem 0.6rem;border-radius:8px;transition:all 0.4s var(--ease-out-expo)}
-.brand:hover{background:rgba(13,0,89,0.25)}
+.brand:hover{background:rgba(13,0,89,0.25);transform:scale(1.08)}
 .brand:hover::after{
   content:'';position:absolute;inset:-4px;border-radius:12px;
   background:radial-gradient(ellipse at center,rgba(74,47,255,0.2),transparent 70%);
@@ -216,7 +216,8 @@ body::before{
   box-shadow:0 4px 16px rgba(74,47,255,0.2)}
 .itch-link svg{width:16px;height:16px;fill:currentColor}
 
-.welcome-section{max-width:700px}
+.welcome-section{max-width:100%}
+.welcome-section .section-desc{max-width:100%}
 .cta-btn{
   display:inline-flex;align-items:center;gap:0.6rem;
   padding:0.85rem 2rem;border-radius:8px;
@@ -342,6 +343,7 @@ body::before{
   .skills-grid{grid-template-columns:1fr}
   .footer{padding:0.75rem 1.25rem;gap:1.25rem}
   .card-info{padding:1rem 1.25rem 1.25rem}
+  .welcome-section .section-desc{max-width:100%}
 }
 </style>
 </head>
